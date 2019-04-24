@@ -138,8 +138,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="crate.png" />
-    <Image Include="marble.png" />
-    <Image Include="woodtexture.jpg" />
+    <Image Include="sand_tile.jpg" />
+    <Image Include="skybox.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

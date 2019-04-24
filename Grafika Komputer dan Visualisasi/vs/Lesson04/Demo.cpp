@@ -21,6 +21,8 @@ void Demo::Init() {
 
 	BuildColoredPlane();
 
+	BuildSkybox();
+
 	InitCamera();
 }
 
@@ -30,6 +32,10 @@ void Demo::DeInit() {
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
+
+	glDeleteVertexArrays(1, &VAOSkybox);
+	glDeleteBuffers(1, &VBOSkybox);
+	glDeleteBuffers(1, &EBOSkybox);
 }
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
@@ -123,7 +129,7 @@ void Demo::Render() {
 	glEnable(GL_DEPTH_TEST);
 
 	// Pass perspective projection matrix
-	glm::mat4 projection = glm::perspective(fovy, (GLfloat)this->screenWidth / (GLfloat)this->screenHeight, 0.1f, 100.0f);
+	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)this->screenWidth / (GLfloat)this->screenHeight, 0.1f, 200.0f);
 	GLint projLoc = glGetUniformLocation(this->shaderProgram, "projection");
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
@@ -135,6 +141,8 @@ void Demo::Render() {
 	DrawColoredCube();
 
 	DrawColoredPlane();
+
+	DrawSkybox();
 
 	glDisable(GL_DEPTH_TEST);
 }
@@ -262,7 +270,7 @@ void Demo::BuildColoredPlane()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	int width, height;
-	unsigned char* image = SOIL_load_image("woodtexture.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("sand_tile.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	SOIL_free_image_data(image);
@@ -322,6 +330,102 @@ void Demo::DrawColoredPlane()
 	glBindVertexArray(0);
 }
 
+void Demo::BuildSkybox() {
+	// Load and create a texture 
+	glGenTextures(1, &textureSkybox);
+	glBindTexture(GL_TEXTURE_2D, textureSkybox);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	int width, height;
+	unsigned char* image = SOIL_load_image("skybox.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	SOIL_free_image_data(image);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// Build geometry
+	GLfloat vertices[] = {
+		// format position, tex coords
+		-100.0, 80.0, -100.0,  1,  0.75, //0
+		100.0, 80.0 , -100.0, 1,  0.5, //1
+		100.0, 80.0 ,  100.0, 0.75, 0.5, //2
+		-100.0, 80.0 ,  100.0,  0.75, 0.75, //3
+
+		100.0, 80.0 , -100.0, 1,  0.5, //4
+		100.0, 80.0 ,  100.0, 0.75, 0.5, //5
+		100.0 , -80.0 , -100.0 , 1, 0.25, //6
+		100.0 , -80 , 100 , 0.75 , 0.25, //7
+
+		100.0, 80.0 ,  100.0, 0.75, 0.5, //8
+		-100.0, 80.0 ,  100.0,  0.5, 0.5, //9
+		100.0 , -80 , 100 , 0.75 , 0.25, //10
+		-100, -80, 100 ,  0.5, 0.25, //11         
+
+		-100.0, 80.0 ,  100.0,  0.5, 0.5, //12
+		-100.0, 80.0, -100.0,  0.25,  0.5, //13
+		-100, -80, 100 ,  0.5 , 0.25, //14
+		-100, -80 , -100 , 0.25 , 0.25,//15
+
+		-100.0, 80.0, -100.0,  0.25,  0.5, //16
+		100.0, 80.0 , -100.0, 0,  0.5, //17
+		-100, -80 , -100.0 , 0.25, 0.25,//18
+		100.0 , -80.0 , -100.0 , 0, 0.25 //19
+	};
+
+	GLuint indices[] = {
+		0,  2,  1,  0,  3,  2,
+		5,  6 , 4 , 5 , 6 , 7,
+		9 , 8 , 10 , 9 , 10 , 11,
+		12 , 15, 13  , 12 , 15, 14,
+		16 , 19 , 17 , 16 , 19 , 18
+	};
+
+	glGenVertexArrays(1, &VAOSkybox);
+	glGenBuffers(1, &VBOSkybox);
+	glGenBuffers(1, &EBOSkybox);
+
+	glBindVertexArray(VAOSkybox);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBOSkybox);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOSkybox);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	// Position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), 0);
+	glEnableVertexAttribArray(0);
+	// TexCoord attribute
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+
+	glBindVertexArray(0); // Unbind VAO
+}
+
+void Demo::DrawSkybox() {
+	glUseProgram(shaderProgram);
+
+	glActiveTexture(GL_TEXTURE10);
+	glBindTexture(GL_TEXTURE_2D, textureSkybox);
+	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 10);
+
+	glBindVertexArray(VAOSkybox); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
+	glm::mat4 model;
+	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+	glDrawElements(GL_TRIANGLES, 10 * 3, GL_UNSIGNED_INT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindVertexArray(0);
+}
+
+//Setting Camera
+
 void Demo::InitCamera()
 {
 	posCamX = 0.0f;
@@ -334,7 +438,7 @@ void Demo::InitCamera()
 	upCamY = 1.0f;
 	upCamZ = 0.0f;
 	CAMERA_SPEED = 0.0001f;
-	fovy = 45.0f;
+	fovy = 50.0f;
 	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
@@ -375,5 +479,5 @@ void Demo::RotateCamera(float speed)
 
 int main(int argc, char** argv) {
 	RenderEngine &app = Demo();
-	app.Start("Project akhir", 800, 600, false, false);
+	app.Start("Desert Budy", 800, 600, false, false);
 }
