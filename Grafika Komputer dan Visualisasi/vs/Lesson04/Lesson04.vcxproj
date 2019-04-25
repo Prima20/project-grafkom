@@ -137,9 +137,11 @@
     <None Include="vertexShader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="bench_wood.png" />
+    <Image Include="brick_tile.jpg" />
     <Image Include="crate.png" />
-    <Image Include="sand_tile.jpg" />
-    <Image Include="skybox.png" />
+    <Image Include="skybox1.png" />
+    <Image Include="wall.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -45,10 +45,16 @@
     <Image Include="crate.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="skybox.png">
+    <Image Include="brick_tile.jpg">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="sand_tile.jpg">
+    <Image Include="skybox1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="wall.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="bench_wood.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
