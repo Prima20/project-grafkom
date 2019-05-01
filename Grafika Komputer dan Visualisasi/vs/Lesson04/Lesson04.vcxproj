@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4DBE4DFC-0492-4285-855F-4A74E7D06862}</ProjectGuid>
     <RootNamespace>Lesson02</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <ProjectName>Project</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -141,6 +141,7 @@
     <Image Include="brick_tile.jpg" />
     <Image Include="crate.png" />
     <Image Include="skybox1.png" />
+    <Image Include="tenda.jpg" />
     <Image Include="wall.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

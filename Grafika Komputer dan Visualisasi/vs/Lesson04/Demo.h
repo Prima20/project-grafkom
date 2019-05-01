@@ -13,12 +13,15 @@ public:
 	Demo();
 	~Demo();
 private:
+	GLuint VBOGedung, VAOGedung, EBOGedung, textureGedung;
 	GLuint shaderProgram, VBO, VAO, EBO, texture, VBO2, VAO2, EBO2, texture2;
 	GLuint VBOSkybox, VAOSkybox, EBOSkybox, textureSkybox;
 	GLuint VBOBuilding, VAOBuilding, EBOBuilding, textureBuilding;
 	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy;
 	virtual void Init();
 	virtual void DeInit();
+	void BuildGedung(int size,float xpos,float ypos);
+	void DrawGedung();
 	virtual void Update(double deltaTime);
 	virtual void Render();
 	virtual void ProcessInput(GLFWwindow *window);
