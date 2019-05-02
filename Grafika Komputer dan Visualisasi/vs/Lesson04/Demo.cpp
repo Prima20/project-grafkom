@@ -20,8 +20,8 @@ void Demo::Init() {
 	//BuildColoredCube();
 
 	BuildColoredPlane();
-	BuildGedung(5,10,10);
-
+	BuildGedung(5,10, 5);
+	BuildSlider(2, -7, 5);
 
 	BuildBench();
 
@@ -150,6 +150,7 @@ void Demo::Render() {
 
 	DrawSkybox();
 	DrawGedung();
+	DrawSlider();
 
 	glDisable(GL_DEPTH_TEST);
 }
@@ -524,7 +525,7 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("bench_wood.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("tenda.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -539,7 +540,7 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 	float botY = -0.5f *t;
 	float frontZ = 0.5f *w / 2;
 	float backZ = -0.5f *w / 2;
-	float tinggiAtap = 4;
+	float tinggiAtap = 1;
 	float atapWidth = w;
 
 	float vertices[] = {
@@ -632,6 +633,126 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 
 }
 
+
+void Demo::BuildSlider(int size, float xpos, float ypos) {
+	// load image into texture memory
+	// ------------------------------
+	// Load and create a texture 
+	glGenTextures(1, &textureSlider);
+	glBindTexture(GL_TEXTURE_2D, textureSlider);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	int width, height;
+	unsigned char* image = SOIL_load_image("kuning.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	SOIL_free_image_data(image);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// set up vertex data (and buffer(s)) and configure vertex attributes
+	// ------------------------------------------------------------------
+	float t = 2;
+	float w = size;
+	float rightX = (0.1f*w / 2) + xpos;
+	float leftX = (-0.1f *w / 2) + xpos;
+	float topY = 0.5f *t;
+	float botY = -0.5f *t;
+	float frontZ = 0.5f *w / 2;
+	float backZ = -0.5f *w / 2;
+	float tinggiAtap = 1;
+	float atapWidth = w;
+
+	float vertices[] = {
+		// format position, tex coords
+		// front
+		leftX, botY, frontZ, 0, 0,  // 0
+		rightX, botY, frontZ, 0.75, 0,   // 1
+		rightX,  topY, frontZ, 0.75, 0.75,   // 2
+		leftX,  topY, frontZ, 0, 0.75,  // 3
+
+		// right
+		rightX,  topY,  frontZ, 0, 0,  // 4
+		rightX,  topY, backZ, 0.75, 0,  // 5
+		rightX, botY, backZ, 0.75, 0.75,  // 6
+		rightX, botY,  frontZ, 0, 1,  // 7
+
+		// back
+		leftX, botY, backZ, 0, 0, // 8 
+		rightX,  botY, backZ, 0.75, 0, // 9
+		leftX,   topY, backZ, 0, 0.75, // 10
+		rightX,  topY, backZ, 0.75, 0.75, // 11
+
+		// left
+		leftX, botY, backZ, 0, 0, // 12
+		leftX, botY,  frontZ, 0.75, 0, // 13
+		leftX,  topY,  frontZ, 0.75, 0.75, // 14
+		leftX,  topY, backZ, 0, 0.75, // 15
+
+		// upper
+		rightX, topY,  frontZ, 0, 0,   // 16
+		leftX, topY,  frontZ, 0.75, 0,  // 17
+		leftX, topY, backZ, 0.75, 0.75,  // 18 // 
+		rightX, topY, backZ, 0, 0.75,   // 19 //
+
+		// bottom
+		leftX, botY, backZ, 0, 0, // 20
+		rightX, botY, backZ, 0.75, 0,  // 21
+		rightX, botY,  frontZ, 0.75, 0.75,  // 22
+		leftX, botY,  frontZ, 0, 0.75, // 23
+
+		// atap
+		(leftX + rightX) / 2,topY + tinggiAtap,(frontZ + backZ) / 2,0.5,1, //24
+		rightX+5,botY,frontZ,1,0, //25
+		rightX+5,botY,backZ,1,0//26
+
+
+
+	};
+
+	unsigned int indices[] = {
+		0,  1,  2,  0,  2,  3,   // front
+		4,  5,  6,  4,  6,  7,   // right
+		8,  9,  10, 9,  10, 11,  // back
+		12, 14, 13, 12, 15, 14,  // left
+		16, 18, 17, 16, 19, 18,  // upper
+		20, 22, 21, 20, 23, 22,   // bottom
+		26,4,26,4,25,5
+
+
+	};
+
+	glGenVertexArrays(1, &VAOSlider);
+	glGenBuffers(1, &VBOSlider);
+	glGenBuffers(1, &EBOSlider);
+	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+	glBindVertexArray(VAOSlider);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBOSlider);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOSlider);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	// define position pointer layout 0
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(0 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(0);
+
+	// define texcoord pointer layout 1
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+
+	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+	glBindVertexArray(0);
+
+	// remember: do NOT unbind the EBO while a VAO is active as the bound element buffer object IS stored in the VAO; keep the EBO bound.
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+}
+
+
 void Demo::DrawGedung()
 {
 	glUseProgram(shaderProgram);
@@ -641,6 +762,21 @@ void Demo::DrawGedung()
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
 
 	glBindVertexArray(VAOGedung); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
+	glDrawElements(GL_TRIANGLES, 48, GL_UNSIGNED_INT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindVertexArray(0);
+}
+void Demo::DrawSlider()
+{
+	glUseProgram(shaderProgram);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureSlider);
+	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
+
+	glBindVertexArray(VAOSlider); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	glDrawElements(GL_TRIANGLES, 48, GL_UNSIGNED_INT, 0);
 

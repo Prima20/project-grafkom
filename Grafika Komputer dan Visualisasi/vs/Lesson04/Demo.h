@@ -17,11 +17,16 @@ private:
 	GLuint shaderProgram, VBO, VAO, EBO, texture, VBO2, VAO2, EBO2, texture2;
 	GLuint VBOSkybox, VAOSkybox, EBOSkybox, textureSkybox;
 	GLuint VBOBuilding, VAOBuilding, EBOBuilding, textureBuilding;
+	GLuint VBOSlider, VAOSlider, EBOSlider, textureSlider;
 	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy;
 	virtual void Init();
 	virtual void DeInit();
 	void BuildGedung(int size,float xpos,float ypos);
 	void DrawGedung();
+	void BuildSlider(int size, float xpos, float ypos);
+	void DrawSlider();
+	void BuildKolam(int size, float xpos, float ypos);
+	void DrawKolam();
 	virtual void Update(double deltaTime);
 	virtual void Render();
 	virtual void ProcessInput(GLFWwindow *window);
