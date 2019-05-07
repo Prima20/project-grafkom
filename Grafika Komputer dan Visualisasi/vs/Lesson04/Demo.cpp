@@ -20,7 +20,7 @@ void Demo::Init() {
 	//BuildColoredCube();
 
 	BuildColoredPlane();
-	BuildGedung(5,10, 4.5f);
+	BuildGedung(10,10, 4.5f);
 	BuildSlider(2, -7, 5);
 
 	BuildVidioTrone(5,5,-10);
@@ -532,14 +532,14 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("texture_gedung.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("building.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
-	float t = 10.0;
+	float t = 15.0;
 	float w = size;
 	float rightX = (0.5f*w / 2)+xpos;
 	float leftX = (-0.5f *w / 2)+xpos;
@@ -554,27 +554,27 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 		// format position, tex coords
 		// front
 		leftX, botY, frontZ, 0, 0,  // 0
-		rightX, botY, frontZ, 1, 0,   // 1
-		rightX,  topY, frontZ, 1, 1,   // 2
+		rightX, botY, frontZ, 0.5, 0,   // 1
+		rightX,  topY, frontZ, 0.5, 1,   // 2
 		leftX,  topY, frontZ, 0, 1,  // 3
 
 		// right
-		rightX,  topY,  frontZ, 0, 0,  // 4
-		rightX,  topY, backZ, 0.75, 0,  // 5
-		rightX, botY, backZ, 0.75, 0.75,  // 6
-		rightX, botY,  frontZ, 0, 1,  // 7
+		rightX,  topY,  frontZ, 1.0, 1.0,  // 4
+		rightX,  topY, backZ,   0.5, 1.0,  // 5
+		rightX, botY, backZ,    0.5f, 0,  // 6
+		rightX, botY,  frontZ,  1,    0,  // 7
 
 		// back
-		leftX, botY, backZ, 0, 0, // 8 
-		rightX,  botY, backZ, 0.75, 0, // 9
-		leftX,   topY, backZ, 0, 0.75, // 10
-		rightX,  topY, backZ, 0.75, 0.75, // 11
+		leftX, botY, backZ, 0.5, 0, // 8 
+		rightX,  botY, backZ, 1.0f, 0, // 9
+		leftX,   topY, backZ, 0.5f, 1.0f, // 10
+		rightX,  topY, backZ, 1.0f, 1.0f, // 11
 
 		// left
-		leftX, botY, backZ, 0, 0, // 12
-		leftX, botY,  frontZ, 0.75, 0, // 13
-		leftX,  topY,  frontZ, 0.75, 0.75, // 14
-		leftX,  topY, backZ, 0, 0.75, // 15
+		leftX, botY, backZ, 0.5f, 0, // 12
+		leftX, botY,  frontZ, 1.0f, 0, // 13
+		leftX,  topY,  frontZ, 1.0f, 1.0f, // 14
+		leftX,  topY, backZ,   0.5f, 1.0f, // 15
 
 		// upper
 		rightX, topY,  frontZ, 0, 0,   // 16
@@ -856,15 +856,15 @@ void Demo::BuildSlider(int size, float xpos, float ypos) {
 
 		// back
 		leftX, botY, backZ, 0, 0, // 8 
-		rightX,  botY, backZ, 0.75, 0, // 9
-		leftX,   topY, backZ, 0, 0.75, // 10
-		rightX,  topY, backZ, 0.75, 0.75, // 11
+		rightX,  botY, backZ, 0.4, 0, // 9
+		leftX,   topY, backZ, 0, 1, // 10
+		rightX,  topY, backZ, 0.4, 1, // 11
 
 		// left
 		leftX, botY, backZ, 0, 0, // 12
-		leftX, botY,  frontZ, 0.75, 0, // 13
-		leftX,  topY,  frontZ, 0.75, 0.75, // 14
-		leftX,  topY, backZ, 0, 0.75, // 15
+		leftX, botY,  frontZ, 0.4f, 0, // 13
+		leftX,  topY,  frontZ, 0.4f, 1.0f, // 14
+		leftX,  topY, backZ, 0, 1.0f, // 15
 
 		// upper
 		rightX, topY,  frontZ, 0, 0,   // 16
