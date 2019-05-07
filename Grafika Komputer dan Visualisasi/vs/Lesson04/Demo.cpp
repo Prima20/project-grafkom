@@ -20,10 +20,10 @@ void Demo::Init() {
 	//BuildColoredCube();
 
 	BuildColoredPlane();
-	BuildGedung(5,10, 10);
+	BuildGedung(5,10, 4.5f);
 	BuildSlider(2, -7, 5);
 
-	BuildVidioTrone(5,0,0);
+	BuildVidioTrone(5,5,-10);
 	//BuildBench();
 
 	BuildSkybox();
@@ -540,8 +540,8 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 	float w = size;
 	float rightX = (0.5f*w / 2)+xpos;
 	float leftX = (-0.5f *w / 2)+xpos;
-	float topY = 0.5f *t;
-	float botY = -0.5f *t;
+	float topY = 0.5f *t +ypos;
+	float botY = -0.5f *t +ypos ;
 	float frontZ = 0.5f *w / 2;
 	float backZ = -0.5f *w / 2;
 	float tinggiAtap = 1;
@@ -551,9 +551,9 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 		// format position, tex coords
 		// front
 		leftX, botY, frontZ, 0, 0,  // 0
-		rightX, botY, frontZ, 0.75, 0,   // 1
-		rightX,  topY, frontZ, 0.75, 0.75,   // 2
-		leftX,  topY, frontZ, 0, 0.75,  // 3
+		rightX, botY, frontZ, 1, 0,   // 1
+		rightX,  topY, frontZ, 1, 1,   // 2
+		leftX,  topY, frontZ, 0, 1,  // 3
 
 		// right
 		rightX,  topY,  frontZ, 0, 0,  // 4
@@ -650,7 +650,7 @@ void Demo::BuildVidioTrone(int size, float xpos, float ypos) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("texture_gedung.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("videotron.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -681,13 +681,13 @@ void Demo::BuildVidioTrone(int size, float xpos, float ypos) {
 		// format position, tex coords
 		// front
 		xMidLeft, botY, zMidFront, 0, 0,  // 0
-		xMidRight, botY, zMidFront, 1, 0,   // 1
-		xMidRight,  yMid, zMidFront, 0.75, 0.75,   // 2
-		xMidLeft,  yMid, zMidFront, 0, 0.75,  // 3
-		leftX, yMid,frontZ,0,0.5f, //4
-		rightX,yMid,frontZ,0,0,//5
-		leftX,topY,frontZ,0,0,//6
-		rightX,topY,frontZ,0,0,//7
+		xMidRight, botY, zMidFront, 0, 0.75,   // 1
+		xMidRight,  yMid, zMidFront, 0, 0.75,   // 2
+		xMidLeft,  yMid, zMidFront, 0.75, 0,  // 3
+		leftX, yMid,frontZ,0.75f,0.5f, //4
+		rightX,yMid,frontZ,1,0.5,//5
+		leftX,topY,frontZ,0.75f,0.25f,//6
+		rightX,topY,frontZ,1,0.25f,//7
 
 		// right
 		rightX,  topY,  frontZ, 0.0f, 0.0f,  // 8

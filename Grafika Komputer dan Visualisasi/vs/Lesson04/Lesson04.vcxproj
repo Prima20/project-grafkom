@@ -143,6 +143,7 @@
     <Image Include="skybox1.png" />
     <Image Include="tenda.jpg" />
     <Image Include="texture_gedung.png" />
+    <Image Include="videotron.png" />
     <Image Include="wall.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
