@@ -747,7 +747,7 @@ void Demo::DrawKomidi(int index) {
 	glBindVertexArray(VAOKomidi[index]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	glm::mat4 modelkomidi;
-	modelkomidi = glm::translate(modelkomidi, glm::vec3(0, 6, 0));
+	modelkomidi = glm::translate(modelkomidi, glm::vec3(5, 6, 0));
 	modelkomidi = glm::rotate(modelkomidi, angle, glm::vec3(0, 0, 1));
 
 	modelkomidi = glm::scale(modelkomidi, glm::vec3(1, 1, 1));
@@ -849,6 +849,7 @@ void Demo::DrawKakiKomidi(int index) {
 
 	glBindVertexArray(VAOkKomidi[index]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 	glm::mat4 model;
+	model = glm::translate(model, glm::vec3(5, 0, 0));
 	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
