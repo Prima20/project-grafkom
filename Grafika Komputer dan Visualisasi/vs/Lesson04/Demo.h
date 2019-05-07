@@ -35,7 +35,7 @@ private:
 	virtual void ProcessInput(GLFWwindow *window);
 	void BuildColoredCube();
 	void BuildColoredPlane();
-	void BuildBench();
+	void BuildBench(float xpos, float zpos);
 	void BuildVidioTrone(int size, float xpos, float ypos);
 	void BuildRoadRoller();
 	void BuildSkybox();
