@@ -60,5 +60,11 @@
     <Image Include="tenda.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="texture_gedung.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="videotron.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

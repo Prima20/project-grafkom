@@ -14,6 +14,8 @@ public:
 	~Demo();
 private:
 	GLuint VBOGedung, VAOGedung, EBOGedung, textureGedung;
+	GLuint VBOkakiTrone, VAOkakiTrone, EBOkakiTrone, textureTrone;
+	GLuint VBOKepalaTrone, VAOKepalaTrone, EBOKepalaTrone, textureKepalaTrone;
 	GLuint shaderProgram, VBO, VAO, EBO, texture, VBO2, VAO2, EBO2, texture2;
 	GLuint VBOSkybox, VAOSkybox, EBOSkybox, textureSkybox;
 	GLuint VBOBuilding, VAOBuilding, EBOBuilding, textureBuilding;
@@ -34,16 +36,19 @@ private:
 	void BuildColoredCube();
 	void BuildColoredPlane();
 	void BuildBench();
+	void BuildVidioTrone(int size, float xpos, float ypos);
 	void BuildRoadRoller();
 	void BuildSkybox();
 	void DrawColoredCube();
 	void DrawColoredPlane();
+	void DrawVidioTrone();
 	void DrawBench();
 	void DrawRoadRoller();
 	void DrawSkybox();
 	void MoveCamera(float speed);
 	void StrafeCamera(float speed);
 	void RotateCamera(float speed);
+
 	void InitCamera();
 };
 
