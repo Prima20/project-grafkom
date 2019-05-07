@@ -20,10 +20,11 @@ void Demo::Init() {
 	//BuildColoredCube();
 
 	BuildColoredPlane();
-	BuildGedung(5,10, 5);
+	BuildGedung(5,10, 10);
 	BuildSlider(2, -7, 5);
 
-	BuildBench();
+	BuildVidioTrone(5,0,0);
+	//BuildBench();
 
 	BuildSkybox();
 
@@ -146,10 +147,11 @@ void Demo::Render() {
 
 	DrawColoredPlane();
 
-	DrawBench();
+	//DrawBench();
 
 	DrawSkybox();
 	DrawGedung();
+	DrawVidioTrone();
 	DrawSlider();
 
 	glDisable(GL_DEPTH_TEST);
@@ -522,10 +524,12 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 	// Load and create a texture 
 	glGenTextures(1, &textureGedung);
 	glBindTexture(GL_TEXTURE_2D, textureGedung);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("tenda.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("texture_gedung.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -611,6 +615,178 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOGedung);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	// define position pointer layout 0
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(0 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(0);
+
+	// define texcoord pointer layout 1
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+
+	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+	glBindVertexArray(0);
+
+	// remember: do NOT unbind the EBO while a VAO is active as the bound element buffer object IS stored in the VAO; keep the EBO bound.
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+}
+
+
+
+void Demo::BuildVidioTrone(int size, float xpos, float ypos) {
+	// load image into texture memory
+	// ------------------------------
+	// Load and create a texture 
+	glGenTextures(1, &textureTrone);
+	glBindTexture(GL_TEXTURE_2D, textureTrone);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	int width, height;
+	unsigned char* image = SOIL_load_image("texture_gedung.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	SOIL_free_image_data(image);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// set up vertex data (and buffer(s)) and configure vertex attributes
+
+	
+
+	// ------------------------------------------------------------------
+	float t = 10.0;
+	float w = size;
+	float rightX = 0.5f *w/2;
+	float leftX = -0.5f *w/2;
+	
+	float xMidLeft = -0.1f *w/2;
+	float xMidRight = 0.1f *w/2;
+	float zMidFront = 0.1f * w/2;
+	float zMidBack = -0.1f *w/2;
+	float topY = 0.5f *t/2;
+	float botY = -0.5f *t/2;
+	float yMid = t/2;
+	float frontZ = 0.5f ;
+	float backZ = -0.5f ;
+	float tinggiAtap = 1;
+	float atapWidth = w;
+
+	float vertices[] = {
+		// format position, tex coords
+		// front
+		xMidLeft, botY, zMidFront, 0, 0,  // 0
+		xMidRight, botY, zMidFront, 1, 0,   // 1
+		xMidRight,  yMid, zMidFront, 0.75, 0.75,   // 2
+		xMidLeft,  yMid, zMidFront, 0, 0.75,  // 3
+		leftX, yMid,frontZ,0,0.5f, //4
+		rightX,yMid,frontZ,0,0,//5
+		leftX,topY,frontZ,0,0,//6
+		rightX,topY,frontZ,0,0,//7
+
+		// right
+		rightX,  topY,  frontZ, 0.0f, 0.0f,  // 8
+		rightX, yMid,frontZ,0.0f, 0.0f,  //9
+		rightX,  topY, backZ, 0.75, 0,  // 10
+		rightX, yMid, backZ, 0.75, 0.75,  // 11
+		xMidRight, botY,  zMidBack, 0, 1,  // 12
+		xMidRight,botY,zMidFront,0,1 ,//13
+		xMidRight, yMid, zMidBack, 0.75, 0.75,  // 14
+		xMidRight, yMid, zMidFront, 0.75, 0.75,  // 15
+		//left
+		leftX,  topY,  frontZ, 0.0f, 0.0f,  // 16
+		leftX, yMid,frontZ,0.0f, 0.0f,  //17
+		leftX,  topY, backZ, 0.75, 0,  // 18
+		leftX, yMid, backZ, 0.75, 0.75,  // 19
+		xMidLeft, botY,  zMidBack, 0, 1,  // 20
+		xMidLeft,botY,zMidFront,0,1 ,//21
+		xMidLeft, yMid, zMidBack, 0.75, 0.75,  // 22
+		xMidLeft, yMid, zMidFront, 0.75, 0.75,  // 23
+
+
+		// back
+		xMidLeft, botY, zMidBack, 0, 0,  // 24
+		xMidRight, botY, zMidBack, 1, 0,   // 25
+		xMidRight,  yMid, zMidBack, 0.75, 0.75,   // 26
+		xMidLeft,  yMid, zMidBack, 0, 0.75,  // 27
+		leftX,    yMid   ,backZ,0,0.5f, //28
+		rightX,    yMid      ,backZ,0,0,//29
+		leftX,topY,backZ,0,0,//30
+		rightX,topY,backZ,0,0,//31
+
+		// upper
+		rightX, topY,  frontZ, 0, 0,   // 32
+		leftX, topY,  frontZ, 0.75, 0,  // 33
+		leftX, topY, backZ, 0.75, 0.75,  // 34 // 
+		rightX, topY, backZ, 0, 0.75,   // 35 //
+
+		// bottom
+		leftX, yMid, backZ, 0, 0, // 36
+		rightX, yMid, backZ, 0.75, 0,  // 37
+		rightX, yMid,  frontZ, 0.75, 0.75,  // 38
+		leftX, yMid,  frontZ, 0, 0.75, // 39
+		
+
+		// atap
+		(leftX + rightX) / 2,topY + tinggiAtap,(frontZ + backZ) / 2,0.5,1 //24
+
+
+
+	};
+
+	unsigned int indices[] = {
+		// front
+		0,  1,  2,  
+		0,  2,  3, 
+		4,  6,  5,
+		6,  7, 5,
+		//right
+		9,8,10, //1 
+		10,11,9,// 2
+		14,12,13,//3
+		13,14,15,//4 
+		// left
+		17,16,18, //1 
+		18,19,17,
+		22,20,21,
+		21,22,23,
+		//bawah 
+		36,37,39,
+		39,38,37,
+		// atap
+		32,33,34,
+		32,34,35,
+		//belakang
+		24,  25,  26,
+		24,  26,  29,
+		28,  30,  29,
+		30,  31, 29,
+
+		
+
+
+
+		
+
+	
+
+	};
+
+	glGenVertexArrays(1, &VAOkakiTrone);
+	glGenBuffers(1, &VBOkakiTrone);
+	glGenBuffers(1, &EBOkakiTrone);
+	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+	glBindVertexArray(VAOkakiTrone);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBOkakiTrone);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOkakiTrone);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// define position pointer layout 0
@@ -752,6 +928,26 @@ void Demo::BuildSlider(int size, float xpos, float ypos) {
 
 }
 
+
+void Demo::DrawVidioTrone()
+{
+	glUseProgram(shaderProgram);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureTrone);
+	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
+	
+
+	glBindVertexArray(VAOkakiTrone); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	glm::mat4 model;
+	model = glm::scale(model, glm::vec3(100, 100, 100));
+	GLint modelScale = glGetUniformLocation(this->shaderProgram, "model");
+	glUniformMatrix4fv(modelScale, 1, GL_FALSE, glm::value_ptr(model));
+	glDrawElements(GL_TRIANGLES, 48, GL_UNSIGNED_INT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindVertexArray(0);
+}
 
 void Demo::DrawGedung()
 {
