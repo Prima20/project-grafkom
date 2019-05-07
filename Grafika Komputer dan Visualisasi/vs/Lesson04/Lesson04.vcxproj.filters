@@ -60,5 +60,14 @@
     <Image Include="tenda.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="perosotan.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="perosotan plastik.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="orange plastik.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
