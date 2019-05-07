@@ -155,7 +155,7 @@ void Demo::Render() {
 	DrawVidioTrone();
 	DrawSlider();
 
-	DrawRoadRoller();
+	//DrawRoadRoller();
 
 	glDisable(GL_DEPTH_TEST);
 }
@@ -683,33 +683,33 @@ void Demo::BuildVidioTrone(int size, float xpos, float ypos) {
 	float vertices[] = {
 		// format position, tex coords
 		// front
-		xMidLeft, botY, zMidFront, 0, 0,  // 0
-		xMidRight, botY, zMidFront, 0, 0.75,   // 1
-		xMidRight,  yMid, zMidFront, 0, 0.75,   // 2
-		xMidLeft,  yMid, zMidFront, 0.75, 0,  // 3
+		xMidLeft, botY, zMidFront, 0.75, 0,  // 0
+		xMidRight, botY, zMidFront, 1, 0,   // 1
+		xMidRight,  yMid, zMidFront, 1, 0.25,   // 2
+		xMidLeft,  yMid, zMidFront, 0.75f, 0.25f,  // 3
 		leftX, yMid,frontZ,0.75f,0.5f, //4
 		rightX,yMid,frontZ,1,0.5,//5
 		leftX,topY,frontZ,0.75f,0.25f,//6
 		rightX,topY,frontZ,1,0.25f,//7
 
 		// right
-		rightX,  topY,  frontZ, 0.0f, 0.0f,  // 8
-		rightX, yMid,frontZ,0.0f, 0.0f,  //9
-		rightX,  topY, backZ, 0.75, 0,  // 10
-		rightX, yMid, backZ, 0.75, 0.75,  // 11
-		xMidRight, botY,  zMidBack, 0, 1,  // 12
-		xMidRight,botY,zMidFront,0,1 ,//13
-		xMidRight, yMid, zMidBack, 0.75, 0.75,  // 14
-		xMidRight, yMid, zMidFront, 0.75, 0.75,  // 15
+		rightX,  topY,  frontZ, 0.5f, 0.5f,  // 8
+		rightX, yMid,frontZ,0.25f, 0.5f,  //9
+		rightX,  topY, backZ, 0.5, 0.25,  // 10
+		rightX, yMid, backZ, 0.25, 0.25,  // 11
+		xMidRight, botY,  zMidBack, 0.75, 0,  // 12
+		xMidRight,botY,zMidFront,   1, 0,//13
+		xMidRight, yMid, zMidBack,  0.75, 0.25,  // 14
+		xMidRight, yMid, zMidFront, 1, 0.25,  // 15
 		//left
-		leftX,  topY,  frontZ, 0.0f, 0.0f,  // 16
-		leftX, yMid,frontZ,0.0f, 0.0f,  //17
-		leftX,  topY, backZ, 0.75, 0,  // 18
-		leftX, yMid, backZ, 0.75, 0.75,  // 19
-		xMidLeft, botY,  zMidBack, 0, 1,  // 20
-		xMidLeft,botY,zMidFront,0,1 ,//21
-		xMidLeft, yMid, zMidBack, 0.75, 0.75,  // 22
-		xMidLeft, yMid, zMidFront, 0.75, 0.75,  // 23
+		leftX,  topY,  frontZ, 0.5f, 0.5f,  // 16
+		leftX, yMid,frontZ, 0.25f, 0.5f,  //17
+		leftX,  topY, backZ, 0.5f, 0.25f,  // 18
+		leftX, yMid, backZ, 0.25f, 0.25f,  // 19
+		xMidLeft, botY,  zMidBack, 0.75, 0,  // 20
+		xMidLeft,botY,zMidFront,   1, 0 ,//21
+		xMidLeft, yMid, zMidBack,  0.75, 0.25,  // 22
+		xMidLeft, yMid, zMidFront, 1, 0.25,  // 23
 
 
 		// back
@@ -723,16 +723,16 @@ void Demo::BuildVidioTrone(int size, float xpos, float ypos) {
 		rightX,topY,backZ,0,0,//31
 
 		// upper
-		rightX, topY,  frontZ, 0, 0,   // 32
-		leftX, topY,  frontZ, 0.75, 0,  // 33
-		leftX, topY, backZ, 0.75, 0.75,  // 34 // 
-		rightX, topY, backZ, 0, 0.75,   // 35 //
+		rightX, topY,  frontZ, 1, 0.25,   // 32
+		leftX, topY,  frontZ, 0.75, 0.25,  // 33
+		leftX, topY, backZ, 0.75, 0,  // 34 // 
+		rightX, topY, backZ, 1, 0,   // 35 //
 
 		// bottom
-		leftX, yMid, backZ, 0, 0, // 36
-		rightX, yMid, backZ, 0.75, 0,  // 37
-		rightX, yMid,  frontZ, 0.75, 0.75,  // 38
-		leftX, yMid,  frontZ, 0, 0.75, // 39
+		leftX, yMid, backZ, 0.75, 0, // 36
+		rightX, yMid, backZ, 1, 0,  // 37
+		rightX, yMid,  frontZ, 1, 0.25,  // 38
+		leftX, yMid,  frontZ, 0.75, 0.25, // 39
 		
 
 		// atap
@@ -1138,7 +1138,9 @@ void Demo::InitCamera()
 	upCamX = 0.0f;
 	upCamY = 1.0f;
 	upCamZ = 0.0f;
-	CAMERA_SPEED = 0.0001f;
+	//CAMERA_SPEED = 0.0001f;
+	//Change cam speed for debug
+	CAMERA_SPEED = 0.001f;
 	fovy = 50.0f;
 	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
