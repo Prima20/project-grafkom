@@ -24,7 +24,7 @@ void Demo::Init() {
 	BuildSlider(2, -7, 5);
 
 	BuildVidioTrone(5,5,-10);
-	BuildBench(-5.0f,5.0f);
+	BuildBench();
 	BuildRoadRoller();
 
 	BuildSkybox();
@@ -148,11 +148,11 @@ void Demo::Render() {
 
 	DrawColoredPlane();
 
-	DrawBench();
+	//DrawBench();
 
 	DrawSkybox();
 	DrawGedung();
-	//DrawVidioTrone();
+	DrawVidioTrone();
 	DrawSlider();
 
 	//DrawRoadRoller();
@@ -439,8 +439,7 @@ void Demo::DrawSkybox() {
 
 
 
-//xpos and zpos for object positioning
-void Demo::BuildBench(float xpos, float zpos) {
+void Demo::BuildBench() {
 	// load image into texture memory
 	// ------------------------------
 	// Load and create a texture 
@@ -454,35 +453,34 @@ void Demo::BuildBench(float xpos, float zpos) {
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
 	float vertices[] = {
 		// format position, tex coords
 
 		// right
-		0.85 + xpos,  -0.1,  0.25 + zpos, 0, 0,  // 0
-		0.85 + xpos,  -0.1, -0.45 + zpos, 0.41, 0.41,  // 1
-		0.85 + xpos, -0.5, -0.45 + zpos, 0.41, 0.41,  // 2
-		0.85 + xpos, -0.5,  0.25 + zpos, 0, 0.41,  // 3
+		0.85,  -0.1,  0.25, 0, 0,  // 0
+		0.85,  -0.1, -0.45, 0.41, 0.41,  // 1
+		0.85, -0.5, -0.45, 0.41, 0.41,  // 2
+		0.85, -0.5,  0.25, 0, 0.41,  // 3
 
 		// back
-		-0.85 + xpos, -0.1, -0.5 + zpos, 0.41, 0.41, // 4
-		0.85 + xpos,  -0.1, -0.5 + zpos, 1, 0.41, // 5
-		0.85 + xpos,   0.8, -0.5 + zpos, 1, 1, // 6
-		-0.85 + xpos,  0.8, -0.5 + zpos, 0.41, 1, // 7
+		-0.85, -0.1, -0.5, 0.41, 0.41, // 4
+		0.85,  -0.1, -0.5, 1, 0.41, // 5
+		0.85,   0.8, -0.5, 1, 1, // 6
+		-0.85,  0.8, -0.5, 0.41, 1, // 7
 
 		// left
-		-0.85 + xpos, -0.1, -0.45 + zpos, 0, 0, // 8
-		-0.85 + xpos, -0.1,  0.25 + zpos, 0.41, 0, // 9
-		-0.85 + xpos,  -0.5,  0.25 + zpos, 0.41, 0.41, // 10
-		-0.85 + xpos,  -0.5, -0.45 + zpos, 0, 0.41, // 11
+		-0.85, -0.1, -0.45, 0, 0, // 8
+		-0.85, -0.1,  0.25, 0.41, 0, // 9
+		-0.85,  -0.5,  0.25, 0.41, 0.41, // 10
+		-0.85,  -0.5, -0.45, 0, 0.41, // 11
 
 		// upper
-		0.85 + xpos, -0.1,  0.3 + zpos, 0.41, 0.41,   // 12
-		-0.85 + xpos, -0.1,  0.3 + zpos, 1, 0.41,  // 13
-		-0.85 + xpos, -0.1, -0.5 + zpos, 1, 1,  // 14
-		0.85 + xpos, -0.1, -0.5 + zpos, 0.41, 1,   // 15
+		0.85, -0.1,  0.3, 0.41, 0.41,   // 12
+		-0.85, -0.1,  0.3, 1, 0.41,  // 13
+		-0.85, -0.1, -0.5, 1, 1,  // 14
+		0.85, -0.1, -0.5, 0.41, 1,   // 15
 	};
 
 	unsigned int indices[] = {
@@ -991,7 +989,6 @@ void Demo::DrawBench() {
 	glBindTexture(GL_TEXTURE_2D, textureBuilding);
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
 
-
 	glBindVertexArray(VAOBuilding); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	glDrawElements(GL_TRIANGLES, 24, GL_UNSIGNED_INT, 0);
@@ -1010,7 +1007,7 @@ void Demo::BuildRoadRoller() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("roadroller.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("test_tex.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -1020,46 +1017,46 @@ void Demo::BuildRoadRoller() {
 	float vertices[] = {
 		// format position, tex coords
 		// front
-		-0.5, -0.3, 2, 0.75, 0.25,  // 0
-		0.5, -0.3,  2, 1.0, 0.25,   // 1
-		0.5,  0.1,  2, 1.0, 0.375,   // 2
-		-0.5,  0.1, 2, 0.75, 0.375,  // 3
+		-0.5, -0.3, 2, 0, 0,  // 0
+		0.5, -0.3,  2, 1, 0,   // 1
+		0.5,  0.1,  2, 1, 1,   // 2
+		-0.5,  0.1, 2, 0, 1,  // 3
 
 		// right bumper
-		0.5,  0.1,  2, 0, 0.5,  // 4
-		0.5,  0.5, 1.2, 0.25, 0.5,  // 5
-		0.5, -0.3, 1.2, 0.25, 0.25,  // 6
-		0.5, -0.3,  2,  0, 0.25,  // 7
+		0.5,  0.1,  2, 0, 0,  // 4
+		0.5,  0.5, 1.2, 0.5, 0,  // 5
+		0.5, -0.3, 1.2, 0.5, 1,  // 6
+		0.5, -0.3,  2, 0, 1,  // 7
 
 		// right side
-		0.5,  0.5,  1.2, 0, 0.5,  // 8
-		0.5,  0.5, -0.5, 0.25, 0.5,  // 9
-		0.5, -0.3, -0.5, 0.25, 0.25,  // 10
-		0.5, -0.3,  1.2, 0, 0.25,  // 11
+		0.5,  0.5,  1.2, 0.5, 0.5,  // 8
+		0.5,  0.5, -0.5, 1, 0.5,  // 9
+		0.5, -0.3, -0.5, 1, 1,  // 10
+		0.5, -0.3,  1.2, 0.5, 1,  // 11
 
 		// left side
 		-0.5,  0.5,  1.2, 0.5, 0.5,  // 12
-		-0.5,  0.5, -0.5, 0.75, 0.5,  // 13
-		-0.5, -0.3, -0.5, 0.75, 0.25,  // 14
-		-0.5, -0.3,  1.2, 0.5, 0.25,  // 15
+		-0.5,  0.5, -0.5, 1, 0.5,  // 13
+		-0.5, -0.3, -0.5, 1, 1,  // 14
+		-0.5, -0.3,  1.2, 0.5, 1,  // 15
 
 		// back
-		-0.5, -0.3, -0.5, 0.25, 0.25, // 16 
-		0.5,  -0.3, -0.5, 0, 0.25, // 17
-		0.5,   0.5, -0.5, 0.25, 0.5, // 18
-		-0.5,  0.5, -0.5, 0, 0.5, // 19
+		-0.5, -0.3, -0.5, 0, 0, // 16 
+		0.5,  -0.3, -0.5, 1, 0, // 17
+		0.5,   0.5, -0.5, 1, 1, // 18
+		-0.5,  0.5, -0.5, 0, 1, // 19
 
 		// left bumper
-		-0.5, 0.1,  2,   0.5, 0.5, // 20
-		-0.5,  0.5,  1.2, 0.75, 0.5, // 21
-		-0.5,  -0.3,  1.2, 0.75, 0.25, // 22
-		-0.5,  -0.3,  2,   0.5, 0.25, // 23
+		-0.5, 0.1,  2,   0, 0, // 20
+		-0.5,  0.5,  1.2, 0.5, 0, // 21
+		-0.5,  -0.3,  1.2, 0.5, 0.5, // 22
+		-0.5,  -0.3,  2,   0, 0.5, // 23
 
-		// upper / front hood
-		0.5, 0.1,  2,    1, 0.375,   // 24
-		-0.5, 0.1,  2,   0.75, 0.375,  // 25
-		-0.5, 0.5,  1.2, 0.75, 0.5,  // 26
-		0.5, 0.5,  1.2,   1, 0.5,   // 27
+		// upper
+		0.5, 0.1,  2, 0, 0,   // 24
+		-0.5, 0.1,  2, 1, 0,  // 25
+		-0.5, 0.5,  1.2, 1, 1,  // 26
+		0.5, 0.5,  1.2, 0, 1,   // 27
 
 		// bottom
 		-0.5, -0.3, -0.5, 0, 0, // 28
@@ -1185,5 +1182,5 @@ void Demo::RotateCamera(float speed)
 
 int main(int argc, char** argv) {
 	RenderEngine &app = Demo();
-	app.Start("Japari Park", 800, 600, false, false);
+	app.Start("Park", 800, 600, false, false);
 }
