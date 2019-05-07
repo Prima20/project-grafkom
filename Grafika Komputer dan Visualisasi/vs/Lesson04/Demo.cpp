@@ -20,13 +20,14 @@ void Demo::Init() {
 
 	BuildColoredPlane();
 	BuildGedung(5,10,10);
+	BuildSlider(2, -10, 10);
 	BuildKomidi(0,0.1,-0.1,4,-4,0.1,-0.1);
 	BuildKomidi(1, 4,-4, 0.1,-0.1, 0.1,-0.1);
 	BuildKomidi(2, 0.2,-0.2, 0.2,-0.2, 0.5,-0.5);
 
 	BuildKakiKomidi(0, 0.1,-0.1, 6,-6, 0.6, 0.4);
 	BuildKakiKomidi(1, 0.1, -0.1, 6, -6, -0.4, -0.7);
-
+	
 	BuildBench();
 	BuildSkybox();
 
@@ -116,10 +117,6 @@ void Demo::ProcessInput(GLFWwindow *window) {
 		viewCamY = posCamY - 8;
 	}
 	RotateCamera(-angleY);
-
-
-	
-
 }
 
 void Demo::Update(double deltaTime) {
@@ -156,6 +153,7 @@ void Demo::Render() {
 	DrawBench();
 	DrawSkybox();
 	DrawGedung();
+	DrawSlider();
 	DrawKomidi(0);
 	DrawKomidi(1);
 	DrawKomidi(2);
@@ -538,7 +536,7 @@ void Demo::BuildSlider(int size, float xpos, float ypos) {
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
-	float t = 2;
+	float t = 3;
 	float w = size;
 	float rightX = (0.1f*w / 2) + xpos;
 	float leftX = (-0.1f *w / 2) + xpos;
@@ -589,8 +587,8 @@ void Demo::BuildSlider(int size, float xpos, float ypos) {
 
 		// atap
 		(leftX + rightX) / 2,topY + tinggiAtap,(frontZ + backZ) / 2,0.5,1, //24
-		rightX+5,botY,frontZ,1,0, //25
-		rightX+5,botY,backZ,1,0//26
+		rightX+20, botY * 4,frontZ,1,0, //25
+		rightX+5 ,botY,backZ,1,0//26
 
 
 
@@ -638,6 +636,22 @@ void Demo::BuildSlider(int size, float xpos, float ypos) {
 
 }
 
+void Demo::DrawSlider()
+{
+	glUseProgram(shaderProgram);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureSlider);
+	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
+
+	glBindVertexArray(VAOSlider
+); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
+	glDrawElements(GL_TRIANGLES, 48, GL_UNSIGNED_INT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindVertexArray(0);
+}
 
 void Demo::DrawGedung()
 {
