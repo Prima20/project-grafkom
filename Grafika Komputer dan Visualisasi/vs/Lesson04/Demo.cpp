@@ -28,6 +28,7 @@ void Demo::Init() {
 	BuildKakiKomidi(0, 0.1,-0.1, 6,-6, 0.6, 0.4);
 	BuildKakiKomidi(1, 0.1, -0.1, 6, -6, -0.4, -0.7);
 	
+	BuildRoadRoller();
 	BuildBench();
 	BuildSkybox();
 
@@ -150,16 +151,17 @@ void Demo::Render() {
 	//DrawColoredCube();
 
 	DrawColoredPlane();
-	DrawBench();
+
+	//DrawBench();
+
 	DrawSkybox();
 	DrawGedung();
 	DrawSlider();
 	DrawKomidi(0);
 	DrawKomidi(1);
 	DrawKomidi(2);
+	DrawRoadRoller();
 
-	DrawKakiKomidi(0);
-	DrawKakiKomidi(1);
 	glDisable(GL_DEPTH_TEST);
 }
 
@@ -334,8 +336,8 @@ void Demo::BuildBench() {
 	glBindTexture(GL_TEXTURE_2D, textureBuilding);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	int width = 2, height = 2;
-	unsigned char* image = SOIL_load_image("bench_wood.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	int width, height;
+	unsigned char* image = SOIL_load_image("bench.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -345,27 +347,27 @@ void Demo::BuildBench() {
 
 		// right
 		0.85,  -0.1,  0.25, 0, 0,  // 0
-		0.85,  -0.1, -0.45, 1, 0,  // 1
-		0.85, -0.5, -0.45, 1, 1,  // 2
-		0.85, -0.5,  0.25, 0, 1,  // 3
+		0.85,  -0.1, -0.45, 0.41, 0.41,  // 1
+		0.85, -0.5, -0.45, 0.41, 0.41,  // 2
+		0.85, -0.5,  0.25, 0, 0.41,  // 3
 
 		// back
-		-0.85, -0.1, -0.5, 0, 0, // 4
-		0.85,  -0.1, -0.5, 1, 0, // 5
+		-0.85, -0.1, -0.5, 0.41, 0.41, // 4
+		0.85,  -0.1, -0.5, 1, 0.41, // 5
 		0.85,   0.8, -0.5, 1, 1, // 6
-		-0.85,  0.8, -0.5, 0, 1, // 7
+		-0.85,  0.8, -0.5, 0.41, 1, // 7
 
 		// left
 		-0.85, -0.1, -0.45, 0, 0, // 8
-		-0.85, -0.1,  0.25, 1, 0, // 9
-		-0.85,  -0.5,  0.25, 1, 1, // 10
-		-0.85,  -0.5, -0.45, 0, 1, // 11
+		-0.85, -0.1,  0.25, 0.41, 0, // 9
+		-0.85,  -0.5,  0.25, 0.41, 0.41, // 10
+		-0.85,  -0.5, -0.45, 0, 0.41, // 11
 
 		// upper
-		0.85, -0.1,  0.3, 0, 0,   // 12
-		-0.85, -0.1,  0.3, 1, 0,  // 13
+		0.85, -0.1,  0.3, 0.41, 0.41,   // 12
+		-0.85, -0.1,  0.3, 1, 0.41,  // 13
 		-0.85, -0.1, -0.5, 1, 1,  // 14
-		0.85, -0.1, -0.5, 0, 1,   // 15
+		0.85, -0.1, -0.5, 0.41, 1,   // 15
 	};
 
 	unsigned int indices[] = {
@@ -904,6 +906,20 @@ void Demo::BuildKakiKomidi(int index,float xplus ,float xmin,float yplus, float 
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
+void Demo::BuildRoadRoller() {
+	// load image into texture memory
+	// ------------------------------
+	// Load and create a texture 
+	glGenTextures(1, &textureRoadRoller);
+	glBindTexture(GL_TEXTURE_2D, textureRoadRoller);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	int width, height;
+	unsigned char* image = SOIL_load_image("test_tex.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	SOIL_free_image_data(image);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
 	float vertices[] = {
@@ -944,6 +960,112 @@ void Demo::BuildKakiKomidi(int index,float xplus ,float xmin,float yplus, float 
 																																				xplus, ymin,  zplus, 1, 1,  // 22
 																																				xmin, ymin,  zplus, 0, 1, // 23
 	};
+		-0.5, -0.3, 2, 0, 0,  // 0
+		0.5, -0.3,  2, 1, 0,   // 1
+		0.5,  0.1,  2, 1, 1,   // 2
+		-0.5,  0.1, 2, 0, 1,  // 3
+
+		// right bumper
+		0.5,  0.1,  2, 0, 0,  // 4
+		0.5,  0.5, 1.2, 0.5, 0,  // 5
+		0.5, -0.3, 1.2, 0.5, 1,  // 6
+		0.5, -0.3,  2, 0, 1,  // 7
+
+		// right side
+		0.5,  0.5,  1.2, 0.5, 0.5,  // 8
+		0.5,  0.5, -0.5, 1, 0.5,  // 9
+		0.5, -0.3, -0.5, 1, 1,  // 10
+		0.5, -0.3,  1.2, 0.5, 1,  // 11
+
+		// left side
+		-0.5,  0.5,  1.2, 0.5, 0.5,  // 12
+		-0.5,  0.5, -0.5, 1, 0.5,  // 13
+		-0.5, -0.3, -0.5, 1, 1,  // 14
+		-0.5, -0.3,  1.2, 0.5, 1,  // 15
+
+		// back
+		-0.5, -0.3, -0.5, 0, 0, // 16 
+		0.5,  -0.3, -0.5, 1, 0, // 17
+		0.5,   0.5, -0.5, 1, 1, // 18
+		-0.5,  0.5, -0.5, 0, 1, // 19
+
+		// left bumper
+		-0.5, 0.1,  2,   0, 0, // 20
+		-0.5,  0.5,  1.2, 0.5, 0, // 21
+		-0.5,  -0.3,  1.2, 0.5, 0.5, // 22
+		-0.5,  -0.3,  2,   0, 0.5, // 23
+
+		// upper
+		0.5, 0.1,  2, 0, 0,   // 24
+		-0.5, 0.1,  2, 1, 0,  // 25
+		-0.5, 0.5,  1.2, 1, 1,  // 26
+		0.5, 0.5,  1.2, 0, 1,   // 27
+
+		// bottom
+		-0.5, -0.3, -0.5, 0, 0, // 28
+		0.5, -0.3, -0.5, 1, 0,  // 29
+		0.5, -0.3,  2, 1, 1,  // 30
+		-0.5, -0.3,  2, 0, 1, // 31
+
+	};
+
+	unsigned int indices[] = {
+		0,  1,  2,  0,  2,  3,   // front
+		4,  5,  6,  4,  6,  7,   // right bumper
+		8,  9,  10, 8,  10, 11,  // right side
+		12, 14, 13, 12, 15, 14,  // left side
+		16, 18, 17, 16, 19, 18,  // back
+		20, 22, 21, 20, 23, 22,  // left bumper
+		24, 25, 26, 24, 26, 27,  // upper
+		28, 29, 30, 28, 31, 30,  // bottom
+	};
+
+	glGenVertexArrays(1, &VAORoadRoller);
+	glGenBuffers(1, &VBORoadRoller);
+	glGenBuffers(1, &EBORoadRoller);
+	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+	glBindVertexArray(VAORoadRoller);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBORoadRoller);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBORoadRoller);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	// define position pointer layout 0
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(0 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(0);
+
+	// define texcoord pointer layout 1
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+
+	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+	glBindVertexArray(0);
+
+	// remember: do NOT unbind the EBO while a VAO is active as the bound element buffer object IS stored in the VAO; keep the EBO bound.
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void Demo::DrawRoadRoller() {
+	glUseProgram(shaderProgram);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureRoadRoller);
+	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
+
+	glBindVertexArray(VAORoadRoller); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
+	glDrawElements(GL_TRIANGLES, 42, GL_UNSIGNED_INT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindVertexArray(0);
+}
+
 
 	unsigned int indices[] = {
 		0,  1,  2,  0,  2,  3,   // front

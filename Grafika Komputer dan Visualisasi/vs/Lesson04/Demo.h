@@ -24,6 +24,8 @@ private:
 	GLuint shaderKomidi, VBOKomidi[OBJECTNUMBER], VAOKomidi[OBJECTNUMBER], EBOKomidi[OBJECTNUMBER], textureKomidi[OBJECTNUMBER];
 	GLuint shaderkKomidi, VBOkKomidi[OBJECTNUMBER], VAOkKomidi[OBJECTNUMBER], EBOkKomidi[OBJECTNUMBER], texturekKomidi[OBJECTNUMBER];
 	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy, angle = 0;
+	GLuint VBORoadRoller, VAORoadRoller, EBORoadRoller, textureRoadRoller;
+	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy;
 	virtual void Init();
 	virtual void DeInit();
 	void BuildGedung(int size,float xpos,float ypos);
@@ -41,10 +43,12 @@ private:
 	void BuildColoredCube();
 	void BuildColoredPlane();
 	void BuildBench();
+	void BuildRoadRoller();
 	void BuildSkybox();
 	void DrawColoredCube();
 	void DrawColoredPlane();
 	void DrawBench();
+	void DrawRoadRoller();
 	void DrawSkybox();
 	void DrawSlider();
 	void MoveCamera(float speed);
