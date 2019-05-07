@@ -443,7 +443,7 @@ void Demo::BuildBench() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("bench_wood.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("bench.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -455,27 +455,27 @@ void Demo::BuildBench() {
 
 		// right
 		0.85,  -0.1,  0.25, 0, 0,  // 0
-		0.85,  -0.1, -0.45, 1, 0,  // 1
-		0.85, -0.5, -0.45, 1, 1,  // 2
-		0.85, -0.5,  0.25, 0, 1,  // 3
+		0.85,  -0.1, -0.45, 0.41, 0.41,  // 1
+		0.85, -0.5, -0.45, 0.41, 0.41,  // 2
+		0.85, -0.5,  0.25, 0, 0.41,  // 3
 
 		// back
-		-0.85, -0.1, -0.5, 0, 0, // 4
-		0.85,  -0.1, -0.5, 1, 0, // 5
+		-0.85, -0.1, -0.5, 0.41, 0.41, // 4
+		0.85,  -0.1, -0.5, 1, 0.41, // 5
 		0.85,   0.8, -0.5, 1, 1, // 6
-		-0.85,  0.8, -0.5, 0, 1, // 7
+		-0.85,  0.8, -0.5, 0.41, 1, // 7
 
 		// left
 		-0.85, -0.1, -0.45, 0, 0, // 8
-		-0.85, -0.1,  0.25, 1, 0, // 9
-		-0.85,  -0.5,  0.25, 1, 1, // 10
-		-0.85,  -0.5, -0.45, 0, 1, // 11
+		-0.85, -0.1,  0.25, 0.41, 0, // 9
+		-0.85,  -0.5,  0.25, 0.41, 0.41, // 10
+		-0.85,  -0.5, -0.45, 0, 0.41, // 11
 
 		// upper
-		0.85, -0.1,  0.3, 0, 0,   // 12
-		-0.85, -0.1,  0.3, 1, 0,  // 13
+		0.85, -0.1,  0.3, 0.41, 0.41,   // 12
+		-0.85, -0.1,  0.3, 1, 0.41,  // 13
 		-0.85, -0.1, -0.5, 1, 1,  // 14
-		0.85, -0.1, -0.5, 0, 1,   // 15
+		0.85, -0.1, -0.5, 0.41, 1,   // 15
 	};
 
 	unsigned int indices[] = {
