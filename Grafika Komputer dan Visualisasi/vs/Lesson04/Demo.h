@@ -6,7 +6,7 @@
 #include <glm/gtx/vector_angle.hpp>
 #include <SOIL/SOIL.h>
 
-#define OBJECTNUMBER 10
+#define OBJECTNUMBER 20
 
 class Demo :
 	public RenderEngine
@@ -25,11 +25,11 @@ private:
 	virtual void Init();
 	virtual void DeInit();
 	void BuildGedung(int size,float xpos,float ypos);
-	void BuildKomidi(int index, float xplus, float xmin, float ypos, float ymin, float zplus, float zmin);
-	void BuildKakiKomidi(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin);
+	void BuildKincir(int index, float xplus, float xmin, float ypos, float ymin, float zplus, float zmin);
+	void BuildKakiKincir(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin);
 	void DrawGedung();
-	void DrawKomidi(int index);
-	void DrawKakiKomidi(int index);
+	void DrawKincir(int index, float xpos, float ypos, float zpos);
+	void DrawKakiKincir(int index, float xpos, float ypos, float zpos);
 	virtual void Update(double deltaTime);
 	virtual void Render();
 	virtual void ProcessInput(GLFWwindow *window);

@@ -20,12 +20,38 @@ void Demo::Init() {
 
 	BuildColoredPlane();
 	BuildGedung(5,10,10);
-	BuildKomidi(0,0.1,-0.1,4,-4,0.1,-0.1);
-	BuildKomidi(1, 4,-4, 0.1,-0.1, 0.1,-0.1);
-	BuildKomidi(2, 0.2,-0.2, 0.2,-0.2, 0.5,-0.5);
 
-	BuildKakiKomidi(0, 0.1,-0.1, 6,-6, 0.6, 0.4);
-	BuildKakiKomidi(1, 0.1, -0.1, 6, -6, -0.4, -0.7);
+	//build kincir1
+	BuildKincir(0,0.1,-0.1,4,-4,0.1,-0.1);
+	BuildKincir(1, 4,-4, 0.1,-0.1, 0.1,-0.1);
+	BuildKincir(2, 0.2,-0.2, 0.2,-0.2, 0.5,-0.5);
+
+	BuildKakiKincir(0, 0.1, -0.1, 6, -6, 0.6, 0.4);
+	BuildKakiKincir(1, 0.1, -0.1, 6, -6, -0.4, -0.7);
+
+	//build kincir2
+	BuildKincir(3, 0.1, -0.1, 4, -4, 0.1, -0.1);
+	BuildKincir(4, 4, -4, 0.1, -0.1, 0.1, -0.1);
+	BuildKincir(5, 0.2, -0.2, 0.2, -0.2, 0.5, -0.5);
+
+	BuildKakiKincir(2, 0.1, -0.1, 6, -6, 0.6, 0.4);
+	BuildKakiKincir(3, 0.1, -0.1, 6, -6, -0.4, -0.7);
+
+	//build kincir3
+	BuildKincir(6, 0.1, -0.1, 4, -4, 0.1, -0.1);
+	BuildKincir(7, 4, -4, 0.1, -0.1, 0.1, -0.1);
+	BuildKincir(8, 0.2, -0.2, 0.2, -0.2, 0.5, -0.5);
+
+	BuildKakiKincir(4, 0.1, -0.1, 6, -6, 0.6, 0.4);
+	BuildKakiKincir(5, 0.1, -0.1, 6, -6, -0.4, -0.7);
+
+	//build kincir4
+	BuildKincir(9, 0.1, -0.1, 4, -4, 0.1, -0.1);
+	BuildKincir(10, 4, -4, 0.1, -0.1, 0.1, -0.1);
+	BuildKincir(11, 0.2, -0.2, 0.2, -0.2, 0.5, -0.5);
+
+	BuildKakiKincir(6, 0.1, -0.1, 6, -6, 0.6, 0.4);
+	BuildKakiKincir(7, 0.1, -0.1, 6, -6, -0.4, -0.7);
 
 	BuildBench();
 	BuildSkybox();
@@ -156,12 +182,38 @@ void Demo::Render() {
 	DrawBench();
 	DrawSkybox();
 	DrawGedung();
-	DrawKomidi(0);
-	DrawKomidi(1);
-	DrawKomidi(2);
 
-	DrawKakiKomidi(0);
-	DrawKakiKomidi(1);
+	//draw komidi1
+	DrawKincir(0,5,6,0);
+	DrawKincir(1,5,6,0);
+	DrawKincir(2,5,6,0);
+
+	DrawKakiKincir(0,5,0,0);
+	DrawKakiKincir(1,5,0,0);
+
+	//draw komidi2
+	DrawKincir(3, 15, 6, 0);
+	DrawKincir(4, 15, 6, 0);
+	DrawKincir(5, 15, 6, 0);
+
+	DrawKakiKincir(2, 15, 0, 0);
+	DrawKakiKincir(3, 15, 0, 0);
+
+	//draw komidi3
+	DrawKincir(6, 5, 6, -9);
+	DrawKincir(7, 5, 6, -9);
+	DrawKincir(8, 5, 6, -9);
+
+	DrawKakiKincir(4, 5, 0, -9);
+	DrawKakiKincir(5, 5, 0, -9);
+
+	//draw komidi4
+	DrawKincir(9, 15, 6, -9);
+	DrawKincir(10, 15, 6, -9);
+	DrawKincir(11, 15, 6, -9);
+
+	DrawKakiKincir(6, 15, 0, -9);
+	DrawKakiKincir(7, 15, 0, -9);
 	glDisable(GL_DEPTH_TEST);
 }
 
@@ -537,7 +589,7 @@ void Demo::DrawGedung()
 	glBindVertexArray(0);
 }
 
-void Demo::BuildKomidi(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin) {
+void Demo::BuildKincir(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin) {
 	{
 		/*batas1
 		glGenTextures(1, &textureKomidi);
@@ -737,7 +789,7 @@ void Demo::BuildKomidi(int index, float xplus, float xmin, float yplus, float ym
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);//*/
 }
 
-void Demo::DrawKomidi(int index) {
+void Demo::DrawKincir(int index, float xpos, float ypos, float zpos) {
 	glUseProgram(shaderProgram);
 
 	glActiveTexture(GL_TEXTURE0);
@@ -747,7 +799,7 @@ void Demo::DrawKomidi(int index) {
 	glBindVertexArray(VAOKomidi[index]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	glm::mat4 modelkomidi;
-	modelkomidi = glm::translate(modelkomidi, glm::vec3(5, 6, 0));
+	modelkomidi = glm::translate(modelkomidi, glm::vec3(xpos, ypos, zpos));
 	modelkomidi = glm::rotate(modelkomidi, angle, glm::vec3(0, 0, 1));
 
 	modelkomidi = glm::scale(modelkomidi, glm::vec3(1, 1, 1));
@@ -761,7 +813,7 @@ void Demo::DrawKomidi(int index) {
 	glBindVertexArray(0);
 }
 
-void Demo::BuildKakiKomidi(int index,float xplus ,float xmin,float yplus, float ymin, float zplus, float zmin) {
+void Demo::BuildKakiKincir(int index,float xplus ,float xmin,float yplus, float ymin, float zplus, float zmin) {
 	glGenTextures(1, &texturekKomidi[index]);
 	glBindTexture(GL_TEXTURE_2D, texturekKomidi[index]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -840,7 +892,7 @@ void Demo::BuildKakiKomidi(int index,float xplus ,float xmin,float yplus, float 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void Demo::DrawKakiKomidi(int index) {
+void Demo::DrawKakiKincir(int index, float xpos, float ypos, float zpos) {
 	glUseProgram(shaderProgram);
 
 	glActiveTexture(GL_TEXTURE0);
@@ -849,7 +901,7 @@ void Demo::DrawKakiKomidi(int index) {
 
 	glBindVertexArray(VAOkKomidi[index]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(5, 0, 0));
+	model = glm::translate(model, glm::vec3(xpos, ypos, zpos));
 	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
