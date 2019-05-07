@@ -18,6 +18,7 @@ private:
 	GLuint VBOSkybox, VAOSkybox, EBOSkybox, textureSkybox;
 	GLuint VBOBuilding, VAOBuilding, EBOBuilding, textureBuilding;
 	GLuint VBOSlider, VAOSlider, EBOSlider, textureSlider;
+	GLuint VBORoadRoller, VAORoadRoller, EBORoadRoller, textureRoadRoller;
 	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy;
 	virtual void Init();
 	virtual void DeInit();
@@ -33,10 +34,12 @@ private:
 	void BuildColoredCube();
 	void BuildColoredPlane();
 	void BuildBench();
+	void BuildRoadRoller();
 	void BuildSkybox();
 	void DrawColoredCube();
 	void DrawColoredPlane();
 	void DrawBench();
+	void DrawRoadRoller();
 	void DrawSkybox();
 	void MoveCamera(float speed);
 	void StrafeCamera(float speed);
