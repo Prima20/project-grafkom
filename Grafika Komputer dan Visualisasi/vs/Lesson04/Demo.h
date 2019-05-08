@@ -6,6 +6,8 @@
 #include <glm/gtx/vector_angle.hpp>
 #include <SOIL/SOIL.h>
 
+#define OBJECTNUMBER 25
+
 class Demo :
 	public RenderEngine
 {
@@ -21,7 +23,9 @@ private:
 	GLuint VBOBuilding, VAOBuilding, EBOBuilding, textureBuilding;
 	GLuint VBOSlider, VAOSlider, EBOSlider, textureSlider;
 	GLuint VBORoadRoller, VAORoadRoller, EBORoadRoller, textureRoadRoller;
+	GLuint shaderKomidi, VBOKomidi[OBJECTNUMBER], VAOKomidi[OBJECTNUMBER], EBOKomidi[OBJECTNUMBER], textureKomidi[OBJECTNUMBER];
 	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy;
+	float angle = 0;
 	virtual void Init();
 	virtual void DeInit();
 	void BuildGedung(int size,float xpos,float ypos);
@@ -29,15 +33,17 @@ private:
 	void BuildSlider(int size, float xpos, float ypos);
 	void DrawSlider();
 	void BuildKolam(int size, float xpos, float ypos);
+	void BuildKomidiKotak(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin, float atap);
 	void DrawKolam();
+	void DrawKomidiKotak(int index, float xpos, float ypos, float zpos);
 	virtual void Update(double deltaTime);
 	virtual void Render();
 	virtual void ProcessInput(GLFWwindow *window);
 	void BuildColoredCube();
 	void BuildColoredPlane();
-	void BuildBench();
-	void BuildVidioTrone(int size, float xpos, float ypos);
-	void BuildRoadRoller();
+	void BuildBench(float xpos, float zpos);
+	void BuildVidioTrone(int size, float xpos, float ypos, float zpos);
+	void BuildRoadRoller(float xpos, float zpos);
 	void BuildSkybox();
 	void DrawColoredCube();
 	void DrawColoredPlane();

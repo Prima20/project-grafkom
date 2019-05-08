@@ -23,9 +23,41 @@ void Demo::Init() {
 	BuildGedung(10,10, 4.5f);
 	BuildSlider(2, -7, 5);
 
-	BuildVidioTrone(5,5,-10);
-	BuildBench();
-	BuildRoadRoller();
+	BuildVidioTrone(5,5,0,-5);
+	BuildBench(-5.0f,6.0f);
+	BuildRoadRoller(0, -6.0f);
+
+//#pragma region komidi kotak
+//	//build komidi kotak alas
+//	BuildKomidiKotak(0, 2, -2, 0, -0.5, 2, -2, 0);
+//	BuildKomidiKotak(1, 2.5, -2.5, 0, -0.5, 2.5, -2.5, 0);
+//
+//	//build komidi kotak atap
+//	BuildKomidiKotak(2, 2, -2, 0, -0.5, 2, -2, 0);
+//	BuildKomidiKotak(3, 2.5, -2.5, 0, -0.5, 2.5, -2.5, 0);
+//
+//	//build komidi tiang
+//	{
+//		BuildKomidiKotak(4, 0.1, -0.1, 3, -3, 0.1, -0.1, 0); //tengah
+//		BuildKomidiKotak(5, 2.4, 2.3, 3, -3, 0.1, -0.1, 0); //kanan
+//		BuildKomidiKotak(6, 0.1, -0.1, 3, -3, 2.4, 2.3, 0); //depan
+//		BuildKomidiKotak(7, -2.4, -2.3, 3, -3, 0.1, -0.1, 0); //kiri
+//		BuildKomidiKotak(8, 0.1, -0.1, 3, -3, -2.4, -2.3, 0); //belakang
+//		BuildKomidiKotak(9, 2.4, 2.3, 3, -3, 2.4, 2.3, 0); //kanandepan
+//		BuildKomidiKotak(10, 2.4, 2.3, 3, -3, -2.4, -2.3, 0); //kananbelakang
+//		BuildKomidiKotak(11, -2.4, -2.3, 3, -3, 2.4, 2.3, 0); //kiridepan
+//		BuildKomidiKotak(12, -2.4, -2.3, 3, -3, -2.4, -2.3, 0); //kiribelakang
+//	}
+//
+//	//build kuda
+//	{
+//		BuildKomidiKotak(13, 2.5, 2.3, 0.1, -0.1, 0.7, -0.7, 0); //kanan
+//		BuildKomidiKotak(14, 0.7, -0.7, 0.1, -0.1, 2.5, 2.3, 0); //depan
+//		BuildKomidiKotak(15, -2.5, -2.3, 0.1, -0.1, 0.7, -0.7, 0); //kiri
+//		BuildKomidiKotak(16, 0.7, -0.7, 0.1, -0.1, -2.5, -2.3, 0); //belakang
+//	}
+//#pragma endregion
+
 
 	BuildSkybox();
 
@@ -121,7 +153,7 @@ void Demo::ProcessInput(GLFWwindow *window) {
 }
 
 void Demo::Update(double deltaTime) {
-	
+	angle += (float)((deltaTime * 1.5f) / 1000);
 }
 
 void Demo::Render() {
@@ -148,7 +180,7 @@ void Demo::Render() {
 
 	DrawColoredPlane();
 
-	//DrawBench();
+	DrawBench();
 
 	DrawSkybox();
 	DrawGedung();
@@ -156,6 +188,35 @@ void Demo::Render() {
 	DrawSlider();
 
 	//DrawRoadRoller();
+
+//#pragma region komidi kotak
+//	//draw Komidi alas
+//	DrawKomidiKotak(0, 12, 0.5, 12);
+//	DrawKomidiKotak(1, 12, 0, 12);
+//	//draw Komidi atap
+//	DrawKomidiKotak(2, 12, 5, 12);
+//	DrawKomidiKotak(3, 12, 5.5, 12);
+//	//draw komidi tiang
+//	{
+//		DrawKomidiKotak(4, 12, 2.5, 12);
+//		DrawKomidiKotak(5, 12, 2.5, 12);
+//		DrawKomidiKotak(6, 12, 2.5, 12);
+//		DrawKomidiKotak(7, 12, 2.5, 12);
+//		DrawKomidiKotak(8, 12, 2.5, 12);
+//		DrawKomidiKotak(9, 12, 2.5, 12);
+//		DrawKomidiKotak(10, 12, 2.5, 12);
+//		DrawKomidiKotak(11, 12, 2.5, 12);
+//		DrawKomidiKotak(12, 12, 2.5, 12);
+//	}
+//	//draw kuda
+//	{
+//		DrawKomidiKotak(13, 12, 2.5, 12);
+//		DrawKomidiKotak(14, 12, 2.5, 12);
+//		DrawKomidiKotak(15, 12, 2.5, 12);
+//		DrawKomidiKotak(16, 12, 2.5, 12);
+//	}
+//#pragma endregion
+
 
 	glDisable(GL_DEPTH_TEST);
 }
@@ -439,7 +500,7 @@ void Demo::DrawSkybox() {
 
 
 
-void Demo::BuildBench() {
+void Demo::BuildBench(float xpos, float zpos) {
 	// load image into texture memory
 	// ------------------------------
 	// Load and create a texture 
@@ -459,28 +520,28 @@ void Demo::BuildBench() {
 		// format position, tex coords
 
 		// right
-		0.85,  -0.1,  0.25, 0, 0,  // 0
-		0.85,  -0.1, -0.45, 0.41, 0.41,  // 1
-		0.85, -0.5, -0.45, 0.41, 0.41,  // 2
-		0.85, -0.5,  0.25, 0, 0.41,  // 3
+		0.85+xpos,  -0.1,  0.25+zpos, 0, 0,  // 0
+		0.85 + xpos,  -0.1, -0.45 + zpos, 0.41, 0.41,  // 1
+		0.85 + xpos, -0.5, -0.45 + zpos, 0.41, 0.41,  // 2
+		0.85 + xpos, -0.5,  0.25 + zpos, 0, 0.41,  // 3
 
 		// back
-		-0.85, -0.1, -0.5, 0.41, 0.41, // 4
-		0.85,  -0.1, -0.5, 1, 0.41, // 5
-		0.85,   0.8, -0.5, 1, 1, // 6
-		-0.85,  0.8, -0.5, 0.41, 1, // 7
+		-0.85 + xpos, -0.1, -0.5 + zpos, 0.41, 0.41, // 4
+		0.85 + xpos,  -0.1, -0.5 + zpos, 1, 0.41, // 5
+		0.85 + xpos,   0.8, -0.5 + zpos, 1, 1, // 6
+		-0.85 + xpos,  0.8, -0.5 + zpos, 0.41, 1, // 7
 
 		// left
-		-0.85, -0.1, -0.45, 0, 0, // 8
-		-0.85, -0.1,  0.25, 0.41, 0, // 9
-		-0.85,  -0.5,  0.25, 0.41, 0.41, // 10
-		-0.85,  -0.5, -0.45, 0, 0.41, // 11
+		-0.85 + xpos, -0.1, -0.45 + zpos, 0, 0, // 8
+		-0.85 + xpos, -0.1,  0.25 + zpos, 0.41, 0, // 9
+		-0.85 + xpos,  -0.5,  0.25 + zpos, 0.41, 0.41, // 10
+		-0.85 + xpos,  -0.5, -0.45 + zpos, 0, 0.41, // 11
 
 		// upper
-		0.85, -0.1,  0.3, 0.41, 0.41,   // 12
-		-0.85, -0.1,  0.3, 1, 0.41,  // 13
-		-0.85, -0.1, -0.5, 1, 1,  // 14
-		0.85, -0.1, -0.5, 0.41, 1,   // 15
+		0.85 + xpos, -0.1,  0.3 + zpos, 0.41, 0.41,   // 12
+		-0.85 + xpos, -0.1,  0.3 + zpos, 1, 0.41,  // 13
+		-0.85 + xpos, -0.1, -0.5 + zpos, 1, 1,  // 14
+		0.85 + xpos, -0.1, -0.5 + zpos, 0.41, 1,   // 15
 	};
 
 	unsigned int indices[] = {
@@ -642,7 +703,7 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 
 
 
-void Demo::BuildVidioTrone(int size, float xpos, float ypos) {
+void Demo::BuildVidioTrone(int size, float xpos, float ypos, float zpos) {
 	// load image into texture memory
 	// ------------------------------
 	// Load and create a texture 
@@ -665,18 +726,18 @@ void Demo::BuildVidioTrone(int size, float xpos, float ypos) {
 	// ------------------------------------------------------------------
 	float t = 10.0;
 	float w = size;
-	float rightX = 0.5f *w/2;
-	float leftX = -0.5f *w/2;
+	float rightX = 0.5f *w/2 + xpos;
+	float leftX = -0.5f *w/2 + xpos;
 	
-	float xMidLeft = -0.1f *w/2;
-	float xMidRight = 0.1f *w/2;
-	float zMidFront = 0.1f * w/2;
-	float zMidBack = -0.1f *w/2;
-	float topY = 0.5f *t/2;
-	float botY = -0.5f *t/2;
-	float yMid = t/2;
-	float frontZ = 0.5f ;
-	float backZ = -0.5f ;
+	float xMidLeft = -0.1f *w/2 + xpos;
+	float xMidRight = 0.1f *w/2 + xpos;
+	float zMidFront = 0.1f * w/2 + zpos;
+	float zMidBack = -0.1f *w/2 + zpos;
+	float topY = 0.5f *t/2 + ypos;
+	float botY = -0.5f *t/2 + ypos;
+	float yMid = t/2 + ypos;
+	float frontZ = 0.5f + zpos;
+	float backZ = -0.5f + zpos;
 	float tinggiAtap = 1;
 	float atapWidth = w;
 
@@ -998,7 +1059,7 @@ void Demo::DrawBench() {
 }
 
 
-void Demo::BuildRoadRoller() {
+void Demo::BuildRoadRoller(float xpos, float zpos) {
 	// load image into texture memory
 	// ------------------------------
 	// Load and create a texture 
@@ -1007,7 +1068,7 @@ void Demo::BuildRoadRoller() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("test_tex.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("roadroller.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -1017,52 +1078,52 @@ void Demo::BuildRoadRoller() {
 	float vertices[] = {
 		// format position, tex coords
 		// front
-		-0.5, -0.3, 2, 0, 0,  // 0
-		0.5, -0.3,  2, 1, 0,   // 1
-		0.5,  0.1,  2, 1, 1,   // 2
-		-0.5,  0.1, 2, 0, 1,  // 3
+		-0.5+xpos, -0.3, 2+zpos, 0.75, 0.25,  // 0
+		0.5 + xpos, -0.3,  2 + zpos, 1.0, 0.25,   // 1
+		0.5 + xpos,  0.1,  2 + zpos, 1.0, 0.375,   // 2
+		-0.5 + xpos,  0.1, 2 + zpos, 0.75, 0.375,  // 3
 
 		// right bumper
-		0.5,  0.1,  2, 0, 0,  // 4
-		0.5,  0.5, 1.2, 0.5, 0,  // 5
-		0.5, -0.3, 1.2, 0.5, 1,  // 6
-		0.5, -0.3,  2, 0, 1,  // 7
+		0.5 + xpos,  0.1,  2 + zpos, 0, 0.5,  // 4
+		0.5 + xpos,  0.5, 1.2 + zpos, 0.25, 0.5,  // 5
+		0.5 + xpos, -0.3, 1.2 + zpos, 0.25, 0.25,  // 6
+		0.5 + xpos, -0.3,  2 + zpos,  0, 0.25,  // 7
 
 		// right side
-		0.5,  0.5,  1.2, 0.5, 0.5,  // 8
-		0.5,  0.5, -0.5, 1, 0.5,  // 9
-		0.5, -0.3, -0.5, 1, 1,  // 10
-		0.5, -0.3,  1.2, 0.5, 1,  // 11
+		0.5 + xpos,  0.5,  1.2 + zpos, 0, 0.5,  // 8
+		0.5 + xpos,  0.5, -0.5 + zpos, 0.25, 0.5,  // 9
+		0.5 + xpos, -0.3, -0.5 + zpos, 0.25, 0.25,  // 10
+		0.5 + xpos, -0.3,  1.2 + zpos, 0, 0.25,  // 11
 
 		// left side
-		-0.5,  0.5,  1.2, 0.5, 0.5,  // 12
-		-0.5,  0.5, -0.5, 1, 0.5,  // 13
-		-0.5, -0.3, -0.5, 1, 1,  // 14
-		-0.5, -0.3,  1.2, 0.5, 1,  // 15
+		-0.5 + xpos,  0.5,  1.2 + zpos, 0.5, 0.5,  // 12
+		-0.5 + xpos,  0.5, -0.5 + zpos, 0.75, 0.5,  // 13
+		-0.5 + xpos, -0.3, -0.5 + zpos, 0.75, 0.25,  // 14
+		-0.5 + xpos, -0.3,  1.2 + zpos, 0.5, 0.25,  // 15
 
 		// back
-		-0.5, -0.3, -0.5, 0, 0, // 16 
-		0.5,  -0.3, -0.5, 1, 0, // 17
-		0.5,   0.5, -0.5, 1, 1, // 18
-		-0.5,  0.5, -0.5, 0, 1, // 19
+		-0.5 + xpos, -0.3, -0.5 + zpos, 0.25, 0.25, // 16 
+		0.5 + xpos,  -0.3, -0.5 + zpos, 0, 0.25, // 17
+		0.5 + xpos,   0.5, -0.5 + zpos, 0.25, 0.5, // 18
+		-0.5 + xpos,  0.5, -0.5 + zpos, 0, 0.5, // 19
 
 		// left bumper
-		-0.5, 0.1,  2,   0, 0, // 20
-		-0.5,  0.5,  1.2, 0.5, 0, // 21
-		-0.5,  -0.3,  1.2, 0.5, 0.5, // 22
-		-0.5,  -0.3,  2,   0, 0.5, // 23
+		-0.5 + xpos, 0.1,  2 + zpos,   0.5, 0.5, // 20
+		-0.5 + xpos,  0.5,  1.2 + zpos, 0.75, 0.5, // 21
+		-0.5 + xpos,  -0.3,  1.2 + zpos, 0.75, 0.25, // 22
+		-0.5 + xpos,  -0.3,  2 + zpos,   0.5, 0.25, // 23
 
-		// upper
-		0.5, 0.1,  2, 0, 0,   // 24
-		-0.5, 0.1,  2, 1, 0,  // 25
-		-0.5, 0.5,  1.2, 1, 1,  // 26
-		0.5, 0.5,  1.2, 0, 1,   // 27
+		// upper / front hood
+		0.5 + xpos, 0.1,  2 + zpos,    1, 0.375,   // 24
+		-0.5 + xpos, 0.1,  2 + zpos,   0.75, 0.375,  // 25
+		-0.5 + xpos, 0.5,  1.2 + zpos, 0.75, 0.5,  // 26
+		0.5 + xpos, 0.5,  1.2 + zpos,   1, 0.5,   // 27
 
 		// bottom
-		-0.5, -0.3, -0.5, 0, 0, // 28
-		0.5, -0.3, -0.5, 1, 0,  // 29
-		0.5, -0.3,  2, 1, 1,  // 30
-		-0.5, -0.3,  2, 0, 1, // 31
+		-0.5 + xpos, -0.3, -0.5 + zpos, 0, 0, // 28
+		0.5 + xpos, -0.3, -0.5 + zpos, 1, 0,  // 29
+		0.5 + xpos, -0.3,  2 + zpos, 1, 1,  // 30
+		-0.5 + xpos, -0.3,  2 + zpos, 0, 1, // 31
 
 	};
 
@@ -1117,7 +1178,118 @@ void Demo::DrawRoadRoller() {
 
 	glBindVertexArray(VAORoadRoller); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
+	glm::mat4 model;
+	model = glm::translate(model, glm::vec3(0, 3, 0));
+
+	model = glm::rotate(model, angle, glm::vec3(0, 1, 0));
+
+	model = glm::scale(model, glm::vec3(5, 5, 5));
+
 	glDrawElements(GL_TRIANGLES, 42, GL_UNSIGNED_INT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindVertexArray(0);
+}
+
+void Demo::BuildKomidiKotak(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin, float atap) {
+	glGenTextures(1, &textureKomidi[index]);
+	glBindTexture(GL_TEXTURE_2D, textureKomidi[index]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	int width, height;
+	unsigned char* image = SOIL_load_image("crate.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	SOIL_free_image_data(image);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	float vertices[] = {
+		// front
+		xmin, ymin, zplus, 0, 0,  // 0
+		xplus, ymin, zplus, 1, 0,   // 1
+		xplus,  yplus, zplus, 1, 1,   // 2
+		xmin,  yplus, zplus, 0, 1,  // 3
+
+									// right
+									xplus,  yplus,  zplus, 0, 0,  // 4
+									xplus,  yplus, zmin, 1, 0,  // 5
+									xplus, ymin, zmin, 1, 1,  // 6
+									xplus, ymin,  zplus, 0, 1,  // 7
+
+																// back
+																xmin, ymin, zmin, 0, 0, // 8 
+																xplus,  ymin, zmin, 1, 0, // 9
+																xplus,   yplus, zmin, 1, 1, // 10
+																xmin,  yplus, zmin, 0, 1, // 11
+
+																						  // left
+																						  xmin, ymin, zmin, 0, 0, // 12
+																						  xmin, ymin, zplus, 1, 0, // 13
+																						  xmin,  yplus,  zplus, 1, 1, // 14
+																						  xmin,  yplus, zmin, 0, 1, // 15
+
+																													// upper
+																													xplus, yplus,  zplus, 0, 0,   // 16
+																													xmin, yplus,  zplus, 1, 0,  // 17
+																													xmin, yplus, zmin, 1, 1,  // 18
+																													xplus, yplus, zmin, 0, 1,   // 19
+
+																																				// bottom
+																																				xmin, ymin, zmin, 0, 0, // 20
+																																				xplus, ymin, zmin, 1, 0,  // 21
+																																				xplus, ymin,  zplus, 1, 1,  // 22
+																																				xmin, ymin,  zplus, 0, 1, // 23
+
+	(xmin + xplus) / 2,yplus + atap,(zplus + zmin) / 2,0.5,1 //24
+	};
+
+	unsigned int indices[] = {
+		0,  1,  2,  0,  2,  3,   // front
+		4,  5,  6,  4,  6,  7,   // right
+		8,  9,  10, 8,  10, 11,  // back
+		12, 14, 13, 12, 15, 14,  // left
+		16, 18, 17, 16, 19, 18,  // upper
+		20, 22, 21, 20, 23, 22,   // bottom
+		//24,16,17,  24,17,18,     // atap
+		24,18,19, //24,19,16
+	};
+
+
+	glGenVertexArrays(1, &VAOKomidi[index]);
+	glGenBuffers(1, &VBOKomidi[index]);
+	glGenBuffers(1, &EBOKomidi[index]);
+	glBindVertexArray(VAOKomidi[index]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOKomidi[index]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOKomidi[index]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(0 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);//*/
+}
+
+void Demo::DrawKomidiKotak(int index, float xpos, float ypos, float zpos) {
+	glUseProgram(shaderProgram);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureKomidi[index]);
+	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
+
+	glBindVertexArray(VAOKomidi[index]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
+	glm::mat4 modelkomidi;
+	modelkomidi = glm::translate(modelkomidi, glm::vec3(xpos, ypos, zpos));
+	modelkomidi = glm::rotate(modelkomidi, fovy, glm::vec3(0, 1, 0));
+
+	modelkomidi = glm::scale(modelkomidi, glm::vec3(1, 1, 1));
+
+	GLint modelLocKomidi = glGetUniformLocation(this->shaderProgram, "model");
+	glUniformMatrix4fv(modelLocKomidi, 1, GL_FALSE, glm::value_ptr(modelkomidi));
+
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindVertexArray(0);
