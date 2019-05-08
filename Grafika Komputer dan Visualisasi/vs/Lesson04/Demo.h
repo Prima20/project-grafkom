@@ -22,6 +22,8 @@ private:
 	GLuint VBOSkybox, VAOSkybox, EBOSkybox, textureSkybox;
 	GLuint VBOBuilding, VAOBuilding, EBOBuilding, textureBuilding;
 	GLuint VBOSlider, VAOSlider, EBOSlider, textureSlider;
+	GLuint shaderKincir, VBOKincir[OBJECTNUMBER], VAOKincir[OBJECTNUMBER], EBOKincir[OBJECTNUMBER], textureKincir[OBJECTNUMBER];
+	GLuint shaderkKincir, VBOkKincir[OBJECTNUMBER], VAOkKincir[OBJECTNUMBER], EBOkKincir[OBJECTNUMBER], texturekKincir[OBJECTNUMBER];
 	GLuint VBORoadRoller[OBJECTNUMBER], VAORoadRoller[OBJECTNUMBER], EBORoadRoller[OBJECTNUMBER], textureRoadRoller[OBJECTNUMBER];
 	GLuint shaderKomidi, VBOKomidi[OBJECTNUMBER], VAOKomidi[OBJECTNUMBER], EBOKomidi[OBJECTNUMBER], textureKomidi[OBJECTNUMBER];
 	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy;
@@ -45,12 +47,16 @@ private:
 	void BuildVidioTrone(int size, float xpos, float ypos, float zpos);
 	void BuildRoadRoller(int index, float xpos, float zpos);
 	void BuildSkybox();
+	void BuildKincir(int index, float xplus, float xmin, float ypos, float ymin, float zplus, float zmin);
+	void BuildKakiKincir(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin);
 	void DrawColoredCube();
 	void DrawColoredPlane();
 	void DrawVidioTrone();
 	void DrawBench();
 	void DrawRoadRoller(int index);
 	void DrawSkybox();
+	void DrawKincir(int index, float xpos, float ypos, float zpos);
+	void DrawKakiKincir(int index, float xpos, float ypos, float zpos);
 	void MoveCamera(float speed);
 	void StrafeCamera(float speed);
 	void RotateCamera(float speed);
