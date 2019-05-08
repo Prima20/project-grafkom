@@ -27,36 +27,36 @@ void Demo::Init() {
 	BuildBench(-5.0f,6.0f);
 	BuildRoadRoller(0, -6.0f);
 
-//#pragma region komidi kotak
-//	//build komidi kotak alas
-//	BuildKomidiKotak(0, 2, -2, 0, -0.5, 2, -2, 0);
-//	BuildKomidiKotak(1, 2.5, -2.5, 0, -0.5, 2.5, -2.5, 0);
-//
-//	//build komidi kotak atap
-//	BuildKomidiKotak(2, 2, -2, 0, -0.5, 2, -2, 0);
-//	BuildKomidiKotak(3, 2.5, -2.5, 0, -0.5, 2.5, -2.5, 0);
-//
-//	//build komidi tiang
-//	{
-//		BuildKomidiKotak(4, 0.1, -0.1, 3, -3, 0.1, -0.1, 0); //tengah
-//		BuildKomidiKotak(5, 2.4, 2.3, 3, -3, 0.1, -0.1, 0); //kanan
-//		BuildKomidiKotak(6, 0.1, -0.1, 3, -3, 2.4, 2.3, 0); //depan
-//		BuildKomidiKotak(7, -2.4, -2.3, 3, -3, 0.1, -0.1, 0); //kiri
-//		BuildKomidiKotak(8, 0.1, -0.1, 3, -3, -2.4, -2.3, 0); //belakang
-//		BuildKomidiKotak(9, 2.4, 2.3, 3, -3, 2.4, 2.3, 0); //kanandepan
-//		BuildKomidiKotak(10, 2.4, 2.3, 3, -3, -2.4, -2.3, 0); //kananbelakang
-//		BuildKomidiKotak(11, -2.4, -2.3, 3, -3, 2.4, 2.3, 0); //kiridepan
-//		BuildKomidiKotak(12, -2.4, -2.3, 3, -3, -2.4, -2.3, 0); //kiribelakang
-//	}
-//
-//	//build kuda
-//	{
-//		BuildKomidiKotak(13, 2.5, 2.3, 0.1, -0.1, 0.7, -0.7, 0); //kanan
-//		BuildKomidiKotak(14, 0.7, -0.7, 0.1, -0.1, 2.5, 2.3, 0); //depan
-//		BuildKomidiKotak(15, -2.5, -2.3, 0.1, -0.1, 0.7, -0.7, 0); //kiri
-//		BuildKomidiKotak(16, 0.7, -0.7, 0.1, -0.1, -2.5, -2.3, 0); //belakang
-//	}
-//#pragma endregion
+
+	//build komidi kotak alas
+	BuildKomidiKotak(0, 2, -2, 0, -0.5, 2, -2, 0);
+	BuildKomidiKotak(1, 2.5, -2.5, 0, -0.5, 2.5, -2.5, 0);
+
+	//build komidi kotak atap
+	BuildKomidiKotak(2, 2, -2, 0, -0.5, 2, -2, 0);
+	BuildKomidiKotak(3, 2.5, -2.5, 0, -0.5, 2.5, -2.5, 0);
+
+	//build komidi tiang
+	{
+		BuildKomidiKotak(4, 0.1, -0.1, 3, -3, 0.1, -0.1, 0); //tengah
+		BuildKomidiKotak(5, 2.4, 2.3, 3, -3, 0.1, -0.1, 0); //kanan
+		BuildKomidiKotak(6, 0.1, -0.1, 3, -3, 2.4, 2.3, 0); //depan
+		BuildKomidiKotak(7, -2.4, -2.3, 3, -3, 0.1, -0.1, 0); //kiri
+		BuildKomidiKotak(8, 0.1, -0.1, 3, -3, -2.4, -2.3, 0); //belakang
+		BuildKomidiKotak(9, 2.4, 2.3, 3, -3, 2.4, 2.3, 0); //kanandepan
+		BuildKomidiKotak(10, 2.4, 2.3, 3, -3, -2.4, -2.3, 0); //kananbelakang
+		BuildKomidiKotak(11, -2.4, -2.3, 3, -3, 2.4, 2.3, 0); //kiridepan
+		BuildKomidiKotak(12, -2.4, -2.3, 3, -3, -2.4, -2.3, 0); //kiribelakang
+	}
+
+	//build kuda
+	{
+		BuildKomidiKotak(13, 2.5, 2.3, 0.1, -0.1, 0.7, -0.7, 0); //kanan
+		BuildKomidiKotak(14, 0.7, -0.7, 0.1, -0.1, 2.5, 2.3, 0); //depan
+		BuildKomidiKotak(15, -2.5, -2.3, 0.1, -0.1, 0.7, -0.7, 0); //kiri
+		BuildKomidiKotak(16, 0.7, -0.7, 0.1, -0.1, -2.5, -2.3, 0); //belakang
+	}
+
 
 
 	BuildSkybox();
@@ -153,7 +153,7 @@ void Demo::ProcessInput(GLFWwindow *window) {
 }
 
 void Demo::Update(double deltaTime) {
-	angle += (float)((deltaTime * 1.5f) / 1000);
+	angle -= (float)((deltaTime * 1.5f) / 1000);
 }
 
 void Demo::Render() {
@@ -189,33 +189,31 @@ void Demo::Render() {
 
 	//DrawRoadRoller();
 
-//#pragma region komidi kotak
-//	//draw Komidi alas
-//	DrawKomidiKotak(0, 12, 0.5, 12);
-//	DrawKomidiKotak(1, 12, 0, 12);
-//	//draw Komidi atap
-//	DrawKomidiKotak(2, 12, 5, 12);
-//	DrawKomidiKotak(3, 12, 5.5, 12);
-//	//draw komidi tiang
-//	{
-//		DrawKomidiKotak(4, 12, 2.5, 12);
-//		DrawKomidiKotak(5, 12, 2.5, 12);
-//		DrawKomidiKotak(6, 12, 2.5, 12);
-//		DrawKomidiKotak(7, 12, 2.5, 12);
-//		DrawKomidiKotak(8, 12, 2.5, 12);
-//		DrawKomidiKotak(9, 12, 2.5, 12);
-//		DrawKomidiKotak(10, 12, 2.5, 12);
-//		DrawKomidiKotak(11, 12, 2.5, 12);
-//		DrawKomidiKotak(12, 12, 2.5, 12);
-//	}
-//	//draw kuda
-//	{
-//		DrawKomidiKotak(13, 12, 2.5, 12);
-//		DrawKomidiKotak(14, 12, 2.5, 12);
-//		DrawKomidiKotak(15, 12, 2.5, 12);
-//		DrawKomidiKotak(16, 12, 2.5, 12);
-//	}
-//#pragma endregion
+	//draw Komidi alas
+	DrawKomidiKotak(0, 12, 0.5, 12);
+	DrawKomidiKotak(1, 12, 0, 12);
+	//draw Komidi atap
+	DrawKomidiKotak(2, 12, 5, 12);
+	DrawKomidiKotak(3, 12, 5.5, 12);
+	//draw komidi tiang
+	{
+		DrawKomidiKotak(4, 12, 2.5, 12);
+		DrawKomidiKotak(5, 12, 2.5, 12);
+		DrawKomidiKotak(6, 12, 2.5, 12);
+		DrawKomidiKotak(7, 12, 2.5, 12);
+		DrawKomidiKotak(8, 12, 2.5, 12);
+		DrawKomidiKotak(9, 12, 2.5, 12);
+		DrawKomidiKotak(10, 12, 2.5, 12);
+		DrawKomidiKotak(11, 12, 2.5, 12);
+		DrawKomidiKotak(12, 12, 2.5, 12);
+	}
+	//draw kuda
+	{
+		DrawKomidiKotak(13, 12, 2.5, 12);
+		DrawKomidiKotak(14, 12, 2.5, 12);
+		DrawKomidiKotak(15, 12, 2.5, 12);
+		DrawKomidiKotak(16, 12, 2.5, 12);
+	}
 
 
 	glDisable(GL_DEPTH_TEST);
@@ -397,7 +395,9 @@ void Demo::DrawColoredPlane()
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 1);
 
 	glBindVertexArray(VAO2); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-
+	glm::mat4 model;
+	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -830,15 +830,6 @@ void Demo::BuildVidioTrone(int size, float xpos, float ypos, float zpos) {
 		24,  26,  29,
 		28,  30,  29,
 		30,  31, 29,
-
-		
-
-
-
-		
-
-	
-
 	};
 
 	glGenVertexArrays(1, &VAOkakiTrone);
@@ -1249,8 +1240,6 @@ void Demo::BuildKomidiKotak(int index, float xplus, float xmin, float yplus, flo
 		12, 14, 13, 12, 15, 14,  // left
 		16, 18, 17, 16, 19, 18,  // upper
 		20, 22, 21, 20, 23, 22,   // bottom
-		//24,16,17,  24,17,18,     // atap
-		24,18,19, //24,19,16
 	};
 
 
@@ -1282,8 +1271,7 @@ void Demo::DrawKomidiKotak(int index, float xpos, float ypos, float zpos) {
 
 	glm::mat4 modelkomidi;
 	modelkomidi = glm::translate(modelkomidi, glm::vec3(xpos, ypos, zpos));
-	modelkomidi = glm::rotate(modelkomidi, fovy, glm::vec3(0, 1, 0));
-
+	modelkomidi = glm::rotate(modelkomidi, angle, glm::vec3(0, 1, 0));
 	modelkomidi = glm::scale(modelkomidi, glm::vec3(1, 1, 1));
 
 	GLint modelLocKomidi = glGetUniformLocation(this->shaderProgram, "model");
@@ -1316,7 +1304,6 @@ void Demo::InitCamera()
 	fovy = 50.0f;
 	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
-
 
 void Demo::MoveCamera(float speed)
 {
