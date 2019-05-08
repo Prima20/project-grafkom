@@ -24,8 +24,12 @@ void Demo::Init() {
 	BuildSlider(2, -7, 5);
 
 	BuildVidioTrone(5,5,0,-5);
-	BuildBench(-5.0f,6.0f);
-	BuildRoadRoller(0, -6.0f);
+	BuildBench(5.0f,3.0f);
+
+	//Road Roller
+	BuildRoadRoller(0, 0, -6.0f);
+	BuildRoadRoller(1, 0, -9.0f);
+	BuildRoadRoller(2, 0, -12.0f);
 
 
 	//build komidi kotak alas
@@ -185,9 +189,11 @@ void Demo::Render() {
 	DrawSkybox();
 	DrawGedung();
 	DrawVidioTrone();
-	DrawSlider();
+	//DrawSlider();
 
-	//DrawRoadRoller();
+	DrawRoadRoller(0);
+	DrawRoadRoller(1);
+	DrawRoadRoller(2);
 
 	//draw Komidi alas
 	DrawKomidiKotak(0, 12, 0.5, 12);
@@ -995,9 +1001,8 @@ void Demo::DrawVidioTrone()
 
 	glBindVertexArray(VAOkakiTrone); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 	glm::mat4 model;
-	model = glm::scale(model, glm::vec3(100, 100, 100));
-	GLint modelScale = glGetUniformLocation(this->shaderProgram, "model");
-	glUniformMatrix4fv(modelScale, 1, GL_FALSE, glm::value_ptr(model));
+	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	glDrawElements(GL_TRIANGLES, 48, GL_UNSIGNED_INT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -1050,12 +1055,12 @@ void Demo::DrawBench() {
 }
 
 
-void Demo::BuildRoadRoller(float xpos, float zpos) {
+void Demo::BuildRoadRoller(int index, float xpos, float zpos) {
 	// load image into texture memory
 	// ------------------------------
 	// Load and create a texture 
-	glGenTextures(1, &textureRoadRoller);
-	glBindTexture(GL_TEXTURE_2D, textureRoadRoller);
+	glGenTextures(1, &textureRoadRoller[index]);
+	glBindTexture(GL_TEXTURE_2D, textureRoadRoller[index]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
@@ -1129,16 +1134,16 @@ void Demo::BuildRoadRoller(float xpos, float zpos) {
 		28, 29, 30, 28, 31, 30,  // bottom
 	};
 
-	glGenVertexArrays(1, &VAORoadRoller);
-	glGenBuffers(1, &VBORoadRoller);
-	glGenBuffers(1, &EBORoadRoller);
+	glGenVertexArrays(1, &VAORoadRoller[index]);
+	glGenBuffers(1, &VBORoadRoller[index]);
+	glGenBuffers(1, &EBORoadRoller[index]);
 	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-	glBindVertexArray(VAORoadRoller);
+	glBindVertexArray(VAORoadRoller[index]);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBORoadRoller);
+	glBindBuffer(GL_ARRAY_BUFFER, VBORoadRoller[index]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBORoadRoller);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBORoadRoller[index]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// define position pointer layout 0
@@ -1160,21 +1165,18 @@ void Demo::BuildRoadRoller(float xpos, float zpos) {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void Demo::DrawRoadRoller() {
+void Demo::DrawRoadRoller(int index) {
 	glUseProgram(shaderProgram);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureRoadRoller);
+	glBindTexture(GL_TEXTURE_2D, textureRoadRoller[index]);
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
 
-	glBindVertexArray(VAORoadRoller); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	glBindVertexArray(VAORoadRoller[index]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(0, 3, 0));
-
-	model = glm::rotate(model, angle, glm::vec3(0, 1, 0));
-
-	model = glm::scale(model, glm::vec3(5, 5, 5));
+	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 	glDrawElements(GL_TRIANGLES, 42, GL_UNSIGNED_INT, 0);
 
@@ -1341,5 +1343,5 @@ void Demo::RotateCamera(float speed)
 
 int main(int argc, char** argv) {
 	RenderEngine &app = Demo();
-	app.Start("Park", 800, 600, false, false);
+	app.Start("Japari Park", 800, 600, false, false);
 }

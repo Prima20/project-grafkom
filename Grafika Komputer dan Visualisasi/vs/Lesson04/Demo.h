@@ -22,7 +22,7 @@ private:
 	GLuint VBOSkybox, VAOSkybox, EBOSkybox, textureSkybox;
 	GLuint VBOBuilding, VAOBuilding, EBOBuilding, textureBuilding;
 	GLuint VBOSlider, VAOSlider, EBOSlider, textureSlider;
-	GLuint VBORoadRoller, VAORoadRoller, EBORoadRoller, textureRoadRoller;
+	GLuint VBORoadRoller[OBJECTNUMBER], VAORoadRoller[OBJECTNUMBER], EBORoadRoller[OBJECTNUMBER], textureRoadRoller[OBJECTNUMBER];
 	GLuint shaderKomidi, VBOKomidi[OBJECTNUMBER], VAOKomidi[OBJECTNUMBER], EBOKomidi[OBJECTNUMBER], textureKomidi[OBJECTNUMBER];
 	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy;
 	float angle = 0;
@@ -43,13 +43,13 @@ private:
 	void BuildColoredPlane();
 	void BuildBench(float xpos, float zpos);
 	void BuildVidioTrone(int size, float xpos, float ypos, float zpos);
-	void BuildRoadRoller(float xpos, float zpos);
+	void BuildRoadRoller(int index, float xpos, float zpos);
 	void BuildSkybox();
 	void DrawColoredCube();
 	void DrawColoredPlane();
 	void DrawVidioTrone();
 	void DrawBench();
-	void DrawRoadRoller();
+	void DrawRoadRoller(int index);
 	void DrawSkybox();
 	void MoveCamera(float speed);
 	void StrafeCamera(float speed);
