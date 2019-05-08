@@ -20,11 +20,11 @@ void Demo::Init() {
 	//BuildColoredCube();
 
 	BuildColoredPlane();
-	BuildGedung(10,10, 4.5f);
+	BuildGedung(10,10, 7.0f);
 	BuildSlider(2, -7, 5);
 
 	BuildVidioTrone(5,5,0,-5);
-	BuildBench(5.0f,3.0f);
+	BuildBench(5.0f,-2.0f);
 
 	//Road Roller
 	BuildRoadRoller(0, 0, -6.0f);
