@@ -6,8 +6,6 @@
 #include <glm/gtx/vector_angle.hpp>
 #include <SOIL/SOIL.h>
 
-#define OBJECTNUMBER 25
-
 class Demo :
 	public RenderEngine
 {
@@ -24,23 +22,14 @@ private:
 	GLuint VBOSlider, VAOSlider, EBOSlider, textureSlider;
 	GLuint VBORoadRoller, VAORoadRoller, EBORoadRoller, textureRoadRoller;
 	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy;
-	GLuint shaderKincir, VBOKincir[OBJECTNUMBER], VAOKincir[OBJECTNUMBER], EBOKincir[OBJECTNUMBER], textureKincir[OBJECTNUMBER];
-	GLuint shaderkKincir, VBOkKincir[OBJECTNUMBER], VAOkKincir[OBJECTNUMBER], EBOkKincir[OBJECTNUMBER], texturekKincir[OBJECTNUMBER];
-	GLuint shaderKomidi, VBOKomidi[OBJECTNUMBER], VAOKomidi[OBJECTNUMBER], EBOKomidi[OBJECTNUMBER], textureKomidi[OBJECTNUMBER];
 	virtual void Init();
 	virtual void DeInit();
 	void BuildGedung(int size,float xpos,float ypos);
-	void BuildKincir(int index, float xplus, float xmin, float ypos, float ymin, float zplus, float zmin);
-	void BuildKakiKincir(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin);
-	void BuildKomidiKotak(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin, float atap);
 	void DrawGedung();
 	void BuildSlider(int size, float xpos, float ypos);
 	void DrawSlider();
 	void BuildKolam(int size, float xpos, float ypos);
 	void DrawKolam();
-	void DrawKincir(int index, float xpos, float ypos, float zpos);
-	void DrawKakiKincir(int index, float xpos, float ypos, float zpos);
-	void DrawKomidiKotak(int index, float xpos, float ypos, float zpos);
 	virtual void Update(double deltaTime);
 	virtual void Render();
 	virtual void ProcessInput(GLFWwindow *window);

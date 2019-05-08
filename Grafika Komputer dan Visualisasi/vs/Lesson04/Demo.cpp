@@ -16,77 +16,17 @@ void Demo::Init() {
 	// build and compile our shader program
 	// ------------------------------------
 	shaderProgram = BuildShader("vertexShader.vert", "fragmentShader.frag", nullptr);
-	//shaderKomidi = BuildShader("vertexShader.vert", "fragmentShader.frag", nullptr);
+
+	//BuildColoredCube();
 
 	BuildColoredPlane();
 	BuildGedung(10,10, 4.5f);
 	BuildSlider(2, -7, 5);
 
-	//build kincir1
-	{
-		BuildKincir(0, 0.1, -0.1, 4, -4, 0.1, -0.1);
-		BuildKincir(1, 4, -4, 0.1, -0.1, 0.1, -0.1);
-		BuildKincir(2, 0.2, -0.2, 0.2, -0.2, 0.5, -0.5);
 	BuildVidioTrone(5,5,-10);
 	BuildBench(-5.0f,5.0f);
 	BuildRoadRoller();
 
-		BuildKakiKincir(0, 0.1, -0.1, 6, -6, 0.6, 0.4);
-		BuildKakiKincir(1, 0.1, -0.1, 6, -6, -0.4, -0.7);
-
-		//build kincir2
-		BuildKincir(3, 0.1, -0.1, 4, -4, 0.1, -0.1);
-		BuildKincir(4, 4, -4, 0.1, -0.1, 0.1, -0.1);
-		BuildKincir(5, 0.2, -0.2, 0.2, -0.2, 0.5, -0.5);
-
-		BuildKakiKincir(2, 0.1, -0.1, 6, -6, 0.6, 0.4);
-		BuildKakiKincir(3, 0.1, -0.1, 6, -6, -0.4, -0.7);
-
-		//build kincir3
-		BuildKincir(6, 0.1, -0.1, 4, -4, 0.1, -0.1);
-		BuildKincir(7, 4, -4, 0.1, -0.1, 0.1, -0.1);
-		BuildKincir(8, 0.2, -0.2, 0.2, -0.2, 0.5, -0.5);
-
-		BuildKakiKincir(4, 0.1, -0.1, 6, -6, 0.6, 0.4);
-		BuildKakiKincir(5, 0.1, -0.1, 6, -6, -0.4, -0.7);
-
-		//build kincir4
-		BuildKincir(9, 0.1, -0.1, 4, -4, 0.1, -0.1);
-		BuildKincir(10, 4, -4, 0.1, -0.1, 0.1, -0.1);
-		BuildKincir(11, 0.2, -0.2, 0.2, -0.2, 0.5, -0.5);
-
-		BuildKakiKincir(6, 0.1, -0.1, 6, -6, 0.6, 0.4);
-		BuildKakiKincir(7, 0.1, -0.1, 6, -6, -0.4, -0.7);
-	}
-
-	//build komidi kotak alas
-	BuildKomidiKotak(0, 2, -2, 0, -0.5, 2, -2, 0);
-	BuildKomidiKotak(1, 2.5, -2.5, 0, -0.5, 2.5, -2.5, 0);
-
-	//build komidi kotak atap
-	BuildKomidiKotak(2, 2, -2, 0, -0.5, 2, -2, 0);
-	BuildKomidiKotak(3, 2.5, -2.5, 0, -0.5, 2.5, -2.5, 0);
-
-	//build komidi tiang
-	{
-		BuildKomidiKotak(4, 0.1, -0.1, 3, -3, 0.1, -0.1, 0); //tengah
-		BuildKomidiKotak(5, 2.4, 2.3, 3, -3, 0.1, -0.1, 0); //kanan
-		BuildKomidiKotak(6, 0.1, -0.1, 3, -3, 2.4, 2.3, 0); //depan
-		BuildKomidiKotak(7, -2.4, -2.3, 3, -3, 0.1, -0.1, 0); //kiri
-		BuildKomidiKotak(8, 0.1, -0.1, 3, -3, -2.4, -2.3, 0); //belakang
-		BuildKomidiKotak(9, 2.4, 2.3, 3, -3, 2.4, 2.3, 0); //kanandepan
-		BuildKomidiKotak(10, 2.4, 2.3, 3, -3, -2.4, -2.3, 0); //kananbelakang
-		BuildKomidiKotak(11, -2.4, -2.3, 3, -3, 2.4, 2.3, 0); //kiridepan
-		BuildKomidiKotak(12, -2.4, -2.3, 3, -3, -2.4, -2.3, 0); //kiribelakang
-	}
-
-	//build kuda
-	{
-		BuildKomidiKotak(13, 2.5, 2.3, 0.1, -0.1, 0.7, -0.7, 0); //kanan
-		BuildKomidiKotak(14, 0.7, -0.7, 0.1, -0.1, 2.5, 2.3, 0); //depan
-		BuildKomidiKotak(15, -2.5, -2.3, 0.1, -0.1, 0.7, -0.7, 0); //kiri
-		BuildKomidiKotak(16, 0.7, -0.7, 0.1, -0.1, -2.5, -2.3, 0); //belakang
-	}
 	BuildSkybox();
 
 	InitCamera();
@@ -102,7 +42,6 @@ void Demo::DeInit() {
 	glDeleteVertexArrays(1, &VAOSkybox);
 	glDeleteBuffers(1, &VBOSkybox);
 	glDeleteBuffers(1, &EBOSkybox);
-
 }
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
@@ -182,7 +121,7 @@ void Demo::ProcessInput(GLFWwindow *window) {
 }
 
 void Demo::Update(double deltaTime) {
-	angle -= (float)((deltaTime * 1.5f) / 10000);
+	
 }
 
 void Demo::Render() {
@@ -198,91 +137,140 @@ void Demo::Render() {
 	// Pass perspective projection matrix
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)this->screenWidth / (GLfloat)this->screenHeight, 0.1f, 200.0f);
 	GLint projLoc = glGetUniformLocation(this->shaderProgram, "projection");
-	GLint projLocKomidi = glGetUniformLocation(this->shaderKincir, "projection");
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-	glUniformMatrix4fv(projLocKomidi, 1, GL_FALSE, glm::value_ptr(projection));
 
 	// LookAt camera (position, target/direction, up)
 	glm::mat4 view = glm::lookAt(glm::vec3(posCamX, posCamY, posCamZ), glm::vec3(viewCamX, viewCamY, viewCamZ), glm::vec3(upCamX, upCamY, upCamZ));
 	GLint viewLoc = glGetUniformLocation(this->shaderProgram, "view");
-	GLint viewLocKomidi = glGetUniformLocation(this->shaderKincir, "view");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-	glUniformMatrix4fv(viewLocKomidi, 1, GL_FALSE, glm::value_ptr(view));
 
 	//DrawColoredCube();
 
 	DrawColoredPlane();
+
 	DrawBench();
+
 	DrawSkybox();
 	DrawGedung();
 	//DrawVidioTrone();
 	DrawSlider();
 
-	//draw kincir1
-	{
-		DrawKincir(0, 5, 6, 0);
-		DrawKincir(1, 5, 6, 0);
-		DrawKincir(2, 5, 6, 0);
 	//DrawRoadRoller();
 
 	glDisable(GL_DEPTH_TEST);
 }
 
-		DrawKakiKincir(0, 5, 0, 0);
-		DrawKakiKincir(1, 5, 0, 0);
+void Demo::BuildColoredCube() {
+	// load image into texture memory
+	// ------------------------------
+	// Load and create a texture 
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	int width, height;
+	unsigned char* image = SOIL_load_image("crate.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	SOIL_free_image_data(image);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
-		//draw kincir2
-		DrawKincir(3, 15, 6, 0);
-		DrawKincir(4, 15, 6, 0);
-		DrawKincir(5, 15, 6, 0);
+	// set up vertex data (and buffer(s)) and configure vertex attributes
+	// ------------------------------------------------------------------
+	float vertices[] = {
+		// format position, tex coords
+		// front
+		-0.5, -0.5, 0.5, 0, 0,  // 0
+		0.5, -0.5, 0.5, 1, 0,   // 1
+		0.5,  0.5, 0.5, 1, 1,   // 2
+		-0.5,  0.5, 0.5, 0, 1,  // 3
 
-		DrawKakiKincir(2, 15, 0, 0);
-		DrawKakiKincir(3, 15, 0, 0);
+		// right
+		0.5,  0.5,  0.5, 0, 0,  // 4
+		0.5,  0.5, -0.5, 1, 0,  // 5
+		0.5, -0.5, -0.5, 1, 1,  // 6
+		0.5, -0.5,  0.5, 0, 1,  // 7
 
-		//draw kincir3
-		DrawKincir(6, 5, 6, -9);
-		DrawKincir(7, 5, 6, -9);
-		DrawKincir(8, 5, 6, -9);
+		// back
+		-0.5, -0.5, -0.5, 0, 0, // 8 
+		0.5,  -0.5, -0.5, 1, 0, // 9
+		0.5,   0.5, -0.5, 1, 1, // 10
+		-0.5,  0.5, -0.5, 0, 1, // 11
 
-		DrawKakiKincir(4, 5, 0, -9);
-		DrawKakiKincir(5, 5, 0, -9);
+		// left
+		-0.5, -0.5, -0.5, 0, 0, // 12
+		-0.5, -0.5,  0.5, 1, 0, // 13
+		-0.5,  0.5,  0.5, 1, 1, // 14
+		-0.5,  0.5, -0.5, 0, 1, // 15
 
-		//draw kincir4
-		DrawKincir(9, 15, 6, -9);
-		DrawKincir(10, 15, 6, -9);
-		DrawKincir(11, 15, 6, -9);
+		// upper
+		0.5, 0.5,  0.5, 0, 0,   // 16
+		-0.5, 0.5,  0.5, 1, 0,  // 17
+		-0.5, 0.5, -0.5, 1, 1,  // 18
+		0.5, 0.5, -0.5, 0, 1,   // 19
 
-		DrawKakiKincir(6, 15, 0, -9);
-		DrawKakiKincir(7, 15, 0, -9);
-	}
-	//draw Komidi alas
-	DrawKomidiKotak(0, 12, 0.5, 12);
-	DrawKomidiKotak(1, 12, 0, 12);
-	//draw Komidi atap
-	DrawKomidiKotak(2, 12, 5, 12);
-	DrawKomidiKotak(3, 12, 5.5, 12);
-	//draw komidi tiang
-	{
-		DrawKomidiKotak(4, 12, 2.5, 12);
-		DrawKomidiKotak(5, 12, 2.5, 12);
-		DrawKomidiKotak(6, 12, 2.5, 12);
-		DrawKomidiKotak(7, 12, 2.5, 12);
-		DrawKomidiKotak(8, 12, 2.5, 12);
-		DrawKomidiKotak(9, 12, 2.5, 12);
-		DrawKomidiKotak(10, 12, 2.5, 12);
-		DrawKomidiKotak(11, 12, 2.5, 12);
-		DrawKomidiKotak(12, 12, 2.5, 12);
-	}
-	//draw kuda
-	{
-		DrawKomidiKotak(13, 12, 2.5, 12);
-		DrawKomidiKotak(14, 12, 2.5, 12);
-		DrawKomidiKotak(15, 12, 2.5, 12);
-		DrawKomidiKotak(16, 12, 2.5, 12);
-	}
-	glDisable(GL_DEPTH_TEST);
+		// bottom
+		-0.5, -0.5, -0.5, 0, 0, // 20
+		0.5, -0.5, -0.5, 1, 0,  // 21
+		0.5, -0.5,  0.5, 1, 1,  // 22
+		-0.5, -0.5,  0.5, 0, 1, // 23
+	};
+
+	unsigned int indices[] = {
+		0,  1,  2,  0,  2,  3,   // front
+		4,  5,  6,  4,  6,  7,   // right
+		8,  9,  10, 8,  10, 11,  // back
+		12, 14, 13, 12, 15, 14,  // left
+		16, 18, 17, 16, 19, 18,  // upper
+		20, 22, 21, 20, 23, 22   // bottom
+	};
+
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
+	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+	glBindVertexArray(VAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	// define position pointer layout 0
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(0 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(0);
+
+	// define texcoord pointer layout 1
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+
+	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+	glBindVertexArray(0);
+
+	// remember: do NOT unbind the EBO while a VAO is active as the bound element buffer object IS stored in the VAO; keep the EBO bound.
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
 }
 
+void Demo::DrawColoredCube()
+{
+	glUseProgram(shaderProgram);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
+
+	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindVertexArray(0);
+}
 
 void Demo::BuildColoredPlane()
 {
@@ -337,6 +325,8 @@ void Demo::BuildColoredPlane()
 	glBindVertexArray(0); // Unbind VAO
 }
 
+
+
 void Demo::DrawColoredPlane()
 {
 	glUseProgram(shaderProgram);
@@ -346,9 +336,7 @@ void Demo::DrawColoredPlane()
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 1);
 
 	glBindVertexArray(VAO2); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-	glm::mat4 model;
-	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -507,33 +495,32 @@ void Demo::BuildBench(float xpos, float zpos) {
 	glGenVertexArrays(1, &VAOBuilding);
 	glGenBuffers(1, &VBOBuilding);
 	glGenBuffers(1, &EBOBuilding);
+	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 	glBindVertexArray(VAOBuilding);
+
 	glBindBuffer(GL_ARRAY_BUFFER, VBOBuilding);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOBuilding);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	// define position pointer layout 0
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(0 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(0);
+
+	// define texcoord pointer layout 1
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
+
+	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
 	glBindVertexArray(0);
+
+	// remember: do NOT unbind the EBO while a VAO is active as the bound element buffer object IS stored in the VAO; keep the EBO bound.
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-}
-
-void Demo::DrawBench() {
-	glUseProgram(shaderProgram);
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureBuilding);
-	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
-
-	glBindVertexArray(VAOBuilding); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindVertexArray(0);
 }
 
 void Demo::BuildGedung(int size, float xpos, float ypos) {
@@ -867,7 +854,7 @@ void Demo::BuildSlider(int size, float xpos, float ypos) {
 		rightX,  topY,  frontZ, 0, 0,  // 4
 		rightX,  topY, backZ, 0.75, 0,  // 5
 		rightX, botY, backZ, 0.75, 0.75,  // 6
-		rightX, botY,  frontZ, 0, 0.75,  // 7
+		rightX, botY,  frontZ, 0, 1,  // 7
 
 		// back
 		leftX, botY, backZ, 0, 0, // 8 
@@ -925,12 +912,23 @@ void Demo::BuildSlider(int size, float xpos, float ypos) {
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOSlider);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	// define position pointer layout 0
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(0 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(0);
+
+	// define texcoord pointer layout 1
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
+
+	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
 	glBindVertexArray(0);
+
+	// remember: do NOT unbind the EBO while a VAO is active as the bound element buffer object IS stored in the VAO; keep the EBO bound.
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 }
@@ -971,84 +969,6 @@ void Demo::DrawGedung()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindVertexArray(0);
 }
-
-void Demo::BuildKincir(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin) {
-	glGenTextures(1, &textureKincir[index]);
-	glBindTexture(GL_TEXTURE_2D, textureKincir[index]);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	int width, height;
-	unsigned char* image = SOIL_load_image("crate.png", &width, &height, 0, SOIL_LOAD_RGBA);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-	SOIL_free_image_data(image);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	float vertices[] = {
-		// front
-		xmin, ymin, zplus, 0, 0,  // 0
-		xplus, ymin, zplus, 1, 0,   // 1
-		xplus,  yplus, zplus, 1, 1,   // 2
-		xmin,  yplus, zplus, 0, 1,  // 3
-
-								// right
-								xplus,  yplus,  zplus, 0, 0,  // 4
-								xplus,  yplus, zmin, 1, 0,  // 5
-								xplus, ymin, zmin, 1, 1,  // 6
-								xplus, ymin,  zplus, 0, 1,  // 7
-
-														// back
-														xmin, ymin, zmin, 0, 0, // 8 
-														xplus,  ymin, zmin, 1, 0, // 9
-														xplus,   yplus, zmin, 1, 1, // 10
-														xmin,  yplus, zmin, 0, 1, // 11
-
-																				// left
-																				xmin, ymin, zmin, 0, 0, // 12
-																				xmin, ymin, zplus, 1, 0, // 13
-																				xmin,  yplus,  zplus, 1, 1, // 14
-																				xmin,  yplus, zmin, 0, 1, // 15
-
-																										// upper
-																										xplus, yplus,  zplus, 0, 0,   // 16
-																										xmin, yplus,  zplus, 1, 0,  // 17
-																										xmin, yplus, zmin, 1, 1,  // 18
-																										xplus, yplus, zmin, 0, 1,   // 19
-
-																																// bottom
-																																xmin, ymin, zmin, 0, 0, // 20
-																																xplus, ymin, zmin, 1, 0,  // 21
-																																xplus, ymin,  zplus, 1, 1,  // 22
-																																xmin, ymin,  zplus, 0, 1, // 23
-	};
-
-	unsigned int indices[] = {
-		0,  1,  2,  0,  2,  3,   // front
-		4,  5,  6,  4,  6,  7,   // right
-		8,  9,  10, 8,  10, 11,  // back
-		12, 14, 13, 12, 15, 14,  // left
-		16, 18, 17, 16, 19, 18,  // upper
-		20, 22, 21, 20, 23, 22,   // bottom
-	};
-
-
-	glGenVertexArrays(1, &VAOKincir[index]);
-	glGenBuffers(1, &VBOKincir[index]);
-	glGenBuffers(1, &EBOKincir[index]);
-	glBindVertexArray(VAOKincir[index]);
-	glBindBuffer(GL_ARRAY_BUFFER, VBOKincir[index]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOKincir[index]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(0 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);//*/
-}
-
-void Demo::DrawKincir(int index, float xpos, float ypos, float zpos) {
 void Demo::DrawSlider()
 {
 	glUseProgram(shaderProgram);
@@ -1068,47 +988,19 @@ void Demo::DrawBench() {
 	glUseProgram(shaderProgram);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureKincir[index]);
+	glBindTexture(GL_TEXTURE_2D, textureBuilding);
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
 
 
 	glBindVertexArray(VAOBuilding); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
-	glm::mat4 modelkomidi;
-	modelkomidi = glm::translate(modelkomidi, glm::vec3(xpos, ypos, zpos));
-	modelkomidi = glm::rotate(modelkomidi, angle, glm::vec3(0, 0, 1));
-
-	modelkomidi = glm::scale(modelkomidi, glm::vec3(1, 1, 1));
-
-	GLint modelLocKomidi = glGetUniformLocation(this->shaderProgram, "model");
-	glUniformMatrix4fv(modelLocKomidi, 1, GL_FALSE, glm::value_ptr(modelkomidi));
-
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, 24, GL_UNSIGNED_INT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindVertexArray(0);
 }
 
-void Demo::BuildKakiKincir(int index,float xplus ,float xmin,float yplus, float ymin, float zplus, float zmin) {
-	glGenTextures(1, &texturekKincir[index]);
-	glBindTexture(GL_TEXTURE_2D, texturekKincir[index]);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	int width, height;
-	unsigned char* image = SOIL_load_image("crate.png", &width, &height, 0, SOIL_LOAD_RGBA);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-	SOIL_free_image_data(image);
-	glBindTexture(GL_TEXTURE_2D, 0);
 
-	// set up vertex data (and buffer(s)) and configure vertex attributes
-	// ------------------------------------------------------------------
-	float vertices[] = {
-		// format position, tex coords
-		// front
-		xmin, ymin, zplus, 0, 0,  // 0
-		xplus, ymin, zplus, 1, 0,   // 1
-		xplus,  yplus, zplus, 1, 1,   // 2
-		xmin,  yplus, zplus, 0, 1,  // 3
 void Demo::BuildRoadRoller() {
 	// load image into texture memory
 	// ------------------------------
@@ -1123,186 +1015,6 @@ void Demo::BuildRoadRoller() {
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-									// right
-									xplus,  yplus,  zplus, 0, 0,  // 4
-									xplus,  yplus, zmin, 1, 0,  // 5
-									xplus, ymin, zmin, 1, 1,  // 6
-									xplus, ymin,  zplus, 0, 1,  // 7
-
-																// back
-																xmin, ymin, zmin, 0, 0, // 8 
-																xplus,  ymin, zmin, 1, 0, // 9
-																xplus,   yplus, zmin, 1, 1, // 10
-																xmin,  yplus, zmin, 0, 1, // 11
-
-																						  // left
-																						  xmin, ymin, zmin, 0, 0, // 12
-																						  xmin, ymin, zplus, 1, 0, // 13
-																						  xmin,  yplus,  zplus, 1, 1, // 14
-																						  xmin,  yplus, zmin, 0, 1, // 15
-
-																													// upper
-																													xplus, yplus,  zplus, 0, 0,   // 16
-																													xmin, yplus,  zplus, 1, 0,  // 17
-																													xmin, yplus, zmin, 1, 1,  // 18
-																													xplus, yplus, zmin, 0, 1,   // 19
-
-																																				// bottom
-																																				xmin, ymin, zmin, 0, 0, // 20
-																																				xplus, ymin, zmin, 1, 0,  // 21
-																																				xplus, ymin,  zplus, 1, 1,  // 22
-																																				xmin, ymin,  zplus, 0, 1, // 23
-	};
-
-	unsigned int indices[] = {
-		0,  1,  2,  0,  2,  3,   // front
-		4,  5,  6,  4,  6,  7,   // right
-		8,  9,  10, 8,  10, 11,  // back
-		12, 14, 13, 12, 15, 14,  // left
-		16, 18, 17, 16, 19, 18,  // upper
-		20, 22, 21, 20, 23, 22,   // bottom
-	};
-
-
-	glGenVertexArrays(1, &VAOkKincir[index]);
-	glGenBuffers(1, &VBOkKincir[index]);
-	glGenBuffers(1, &EBOkKincir[index]);
-	glBindVertexArray(VAOkKincir[index]);
-	glBindBuffer(GL_ARRAY_BUFFER, VBOkKincir[index]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOkKincir[index]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(0 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-}
-
-void Demo::DrawKakiKincir(int index, float xpos, float ypos, float zpos) {
-	glUseProgram(shaderProgram);
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texturekKincir[index]);
-	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
-
-	glBindVertexArray(VAOkKincir[index]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(xpos, ypos, zpos));
-	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindVertexArray(0);
-}
-
-void Demo::BuildKomidiKotak(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin, float atap) {
-	glGenTextures(1, &textureKomidi[index]);
-	glBindTexture(GL_TEXTURE_2D, textureKomidi[index]);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	int width, height;
-	unsigned char* image = SOIL_load_image("crate.png", &width, &height, 0, SOIL_LOAD_RGBA);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-	SOIL_free_image_data(image);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	float vertices[] = {
-		// front
-		xmin, ymin, zplus, 0, 0,  // 0
-		xplus, ymin, zplus, 1, 0,   // 1
-		xplus,  yplus, zplus, 1, 1,   // 2
-		xmin,  yplus, zplus, 0, 1,  // 3
-
-									// right
-									xplus,  yplus,  zplus, 0, 0,  // 4
-									xplus,  yplus, zmin, 1, 0,  // 5
-									xplus, ymin, zmin, 1, 1,  // 6
-									xplus, ymin,  zplus, 0, 1,  // 7
-
-																// back
-																xmin, ymin, zmin, 0, 0, // 8 
-																xplus,  ymin, zmin, 1, 0, // 9
-																xplus,   yplus, zmin, 1, 1, // 10
-																xmin,  yplus, zmin, 0, 1, // 11
-
-																						  // left
-																						  xmin, ymin, zmin, 0, 0, // 12
-																						  xmin, ymin, zplus, 1, 0, // 13
-																						  xmin,  yplus,  zplus, 1, 1, // 14
-																						  xmin,  yplus, zmin, 0, 1, // 15
-
-																													// upper
-																													xplus, yplus,  zplus, 0, 0,   // 16
-																													xmin, yplus,  zplus, 1, 0,  // 17
-																													xmin, yplus, zmin, 1, 1,  // 18
-																													xplus, yplus, zmin, 0, 1,   // 19
-
-																																				// bottom
-																																				xmin, ymin, zmin, 0, 0, // 20
-																																				xplus, ymin, zmin, 1, 0,  // 21
-																																				xplus, ymin,  zplus, 1, 1,  // 22
-																																				xmin, ymin,  zplus, 0, 1, // 23
-	
-	(xmin + xplus) / 2,yplus + atap,(zplus + zmin) / 2,0.5,1 //24
-	};
-
-	unsigned int indices[] = {
-		0,  1,  2,  0,  2,  3,   // front
-		4,  5,  6,  4,  6,  7,   // right
-		8,  9,  10, 8,  10, 11,  // back
-		12, 14, 13, 12, 15, 14,  // left
-		16, 18, 17, 16, 19, 18,  // upper
-		20, 22, 21, 20, 23, 22,   // bottom
-		//24,16,17,  24,17,18,     // atap
-		24,18,19, //24,19,16
-	};
-
-
-	glGenVertexArrays(1, &VAOKomidi[index]);
-	glGenBuffers(1, &VBOKomidi[index]);
-	glGenBuffers(1, &EBOKomidi[index]);
-	glBindVertexArray(VAOKomidi[index]);
-	glBindBuffer(GL_ARRAY_BUFFER, VBOKomidi[index]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOKomidi[index]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(0 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);//*/
-}
-
-void Demo::DrawKomidiKotak(int index, float xpos, float ypos, float zpos) {
-	glUseProgram(shaderProgram);
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureKomidi[index]);
-	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
-
-	glBindVertexArray(VAOKomidi[index]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-
-	glm::mat4 modelkomidi;
-	modelkomidi = glm::translate(modelkomidi, glm::vec3(xpos, ypos, zpos));
-	modelkomidi = glm::rotate(modelkomidi, angle, glm::vec3(0, 1, 0));
-
-	modelkomidi = glm::scale(modelkomidi, glm::vec3(1, 1, 1));
-
-	GLint modelLocKomidi = glGetUniformLocation(this->shaderProgram, "model");
-	glUniformMatrix4fv(modelLocKomidi, 1, GL_FALSE, glm::value_ptr(modelkomidi));
-
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindVertexArray(0);
-}
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
 	float vertices[] = {
@@ -1417,6 +1129,7 @@ void Demo::DrawRoadRoller() {
 
 
 //Setting Camera
+
 void Demo::InitCamera()
 {
 	posCamX = 0.0f;
@@ -1434,6 +1147,7 @@ void Demo::InitCamera()
 	fovy = 50.0f;
 	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
+
 
 void Demo::MoveCamera(float speed)
 {
