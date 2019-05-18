@@ -16,6 +16,7 @@ void Demo::Init() {
 	// build and compile our shader program
 	// ------------------------------------
 	shaderProgram = BuildShader("vertexShader.vert", "fragmentShader.frag", nullptr);
+	tshaderProgram = BuildShader("texturedObject.vert", "texturedObject.frag", nullptr);
 
 	//BuildColoredCube();
 
@@ -214,6 +215,14 @@ void Demo::Render() {
 	glm::mat4 view = glm::lookAt(glm::vec3(posCamX, posCamY, posCamZ), glm::vec3(viewCamX, viewCamY, viewCamZ), glm::vec3(upCamX, upCamY, upCamZ));
 	GLint viewLoc = glGetUniformLocation(this->shaderProgram, "view");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+	// set lighting attributes
+	GLint lightPosLoc = glGetUniformLocation(this->tshaderProgram, "lightPos");
+	glUniform3f(lightPosLoc, 0, 1, 0);
+	GLint viewPosLoc = glGetUniformLocation(this->tshaderProgram, "viewPos");
+	glUniform3f(viewPosLoc, 0, 2, 3);
+	GLint lightColorLoc = glGetUniformLocation(this->tshaderProgram, "lightColor");
+	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
 
 	//DrawColoredCube();
 

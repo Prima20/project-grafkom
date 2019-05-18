@@ -16,6 +16,7 @@ public:
 	~Demo();
 private:
 	GLuint VBOGedung, VAOGedung, EBOGedung, textureGedung;
+	GLuint tshaderProgram;
 	GLuint VBOkakiTrone, VAOkakiTrone, EBOkakiTrone, textureTrone;
 	GLuint VBOKepalaTrone, VAOKepalaTrone, EBOKepalaTrone, textureKepalaTrone;
 	GLuint shaderProgram, VBO, VAO, EBO, texture, VBO2, VAO2, EBO2, texture2;
