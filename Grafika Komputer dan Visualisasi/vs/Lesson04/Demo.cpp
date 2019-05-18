@@ -97,9 +97,6 @@ void Demo::Init() {
 	}
 #pragma endregion
 
-
-
-
 	BuildSkybox();
 
 	InitCamera();
@@ -195,6 +192,7 @@ void Demo::ProcessInput(GLFWwindow *window) {
 
 void Demo::Update(double deltaTime) {
 	angle -= (float)((deltaTime * 1.5f) / 1000);
+	std::cout << "angle: " << angle << std::endl;
 }
 
 void Demo::Render() {
@@ -464,8 +462,6 @@ void Demo::BuildColoredPlane()
 	glBindVertexArray(0); // Unbind VAO
 }
 
-
-
 void Demo::DrawColoredPlane()
 {
 	glUseProgram(shaderProgram);
@@ -577,8 +573,6 @@ void Demo::DrawSkybox() {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindVertexArray(0);
 }
-
-
 
 void Demo::BuildBench(float xpos, float zpos) {
 	// load image into texture memory
@@ -781,8 +775,6 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 
 }
 
-
-
 void Demo::BuildVidioTrone(int size, float xpos, float ypos, float zpos) {
 	// load image into texture memory
 	// ------------------------------
@@ -944,7 +936,6 @@ void Demo::BuildVidioTrone(int size, float xpos, float ypos, float zpos) {
 
 }
 
-
 void Demo::BuildSlider(int size, float xpos, float ypos) {
 	// load image into texture memory
 	// ------------------------------
@@ -1063,7 +1054,6 @@ void Demo::BuildSlider(int size, float xpos, float ypos) {
 
 }
 
-
 void Demo::DrawVidioTrone()
 {
 	glUseProgram(shaderProgram);
@@ -1098,6 +1088,7 @@ void Demo::DrawGedung()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindVertexArray(0);
 }
+
 void Demo::DrawSlider()
 {
 	glUseProgram(shaderProgram);
@@ -1113,6 +1104,7 @@ void Demo::DrawSlider()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindVertexArray(0);
 }
+
 void Demo::DrawBench() {
 	glUseProgram(shaderProgram);
 
@@ -1127,7 +1119,6 @@ void Demo::DrawBench() {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindVertexArray(0);
 }
-
 
 void Demo::BuildRoadRoller(int index, float xpos, float zpos) {
 	// load image into texture memory
@@ -1247,10 +1238,35 @@ void Demo::DrawRoadRoller(int index) {
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
 
 	glBindVertexArray(VAORoadRoller[index]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-
+	
 	glm::mat4 model;
-	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	float jalan = abs(angle);
+	if (jalan < 12) {
+		model = glm::translate(model, glm::vec3(0, 0, jalan));
+		n = 1;
+	}
+	else if (jalan >= 12 && jalan < 24) {
+		model = glm::translate(model, glm::vec3(jalan, 0, 9));
+		model = glm::rotate(model, gerak, glm::vec3(0, 1, 0));
+	}
+	else if (jalan >= 24 && jalan < 40) {
+		gerak = 3.1;
+		model = glm::translate(model, glm::vec3(20, 0, angle+20));
+		model = glm::rotate(model, gerak, glm::vec3(0, 1, 0));
+	}
+	else if (jalan >= 40 && jalan < 50) {
+		gerak = 4.5;
+		model = glm::translate(model, glm::vec3(angle+45, 0, -15));
+		model = glm::rotate(model, gerak, glm::vec3(0, 1, 0));
+	}
+	else {
+		angle = 0;
+	}
+	//model = glm::translate(model,glm::vec3(0, 0, -angle));
+	model = glm::scale(model, glm::vec3(1, 1, 1));
+
+	GLint modelLocKomidi = glGetUniformLocation(this->shaderProgram, "model");
+	glUniformMatrix4fv(modelLocKomidi, 1, GL_FALSE, glm::value_ptr(model));
 
 	glDrawElements(GL_TRIANGLES, 42, GL_UNSIGNED_INT, 0);
 

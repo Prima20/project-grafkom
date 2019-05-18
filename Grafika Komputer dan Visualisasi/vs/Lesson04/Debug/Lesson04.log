@@ -1,7 +1,99 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Lesson02.vcxproj, Lesson03.vcxproj, Lesson04.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Demo.cpp
-a:\belajar\grafkom\project akhir\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(481): warning C4305: 'initializing': truncation from 'double' to 'float'
-a:\belajar\grafkom\project akhir\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(540): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-a:\belajar\grafkom\project akhir\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(664): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-a:\belajar\grafkom\project akhir\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(830): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  Lesson04.vcxproj -> A:\belajar\Grafkom\Project AKhir\Grafika Komputer dan Visualisasi\vs\Debug\Project.exe
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(45): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(46): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(47): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(48): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(49): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(50): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(51): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(52): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(53): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(58): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(59): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(60): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(61): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(67): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(68): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(69): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(71): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(72): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(75): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(76): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(77): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(79): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(80): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(83): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(84): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(85): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(87): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(88): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(91): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(92): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(93): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(95): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(96): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(619): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(597): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(619): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(598): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(599): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(600): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(603): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(604): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(605): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(606): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(609): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(610): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(611): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(612): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(615): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(616): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(617): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(618): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(678): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(800): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(956): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1011): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1011): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1189): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1142): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1189): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1143): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1144): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1145): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1148): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1149): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1150): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1151): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1154): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1155): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1156): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1157): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1160): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1161): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1162): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1163): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1166): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1167): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1168): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1169): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1172): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1173): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1174): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1175): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1178): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1179): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1180): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1181): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1184): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1185): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1186): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1187): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\project c\grafkomnew\project-grafkom\grafika komputer dan visualisasi\vs\lesson04\demo.cpp(1253): warning C4305: '=': truncation from 'double' to 'float'
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+SOIL.lib(image_DXT.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'SOIL.lib(image_DXT.obj)' or at 'D:\PROJECT C\grafkomnew\project-grafkom\Grafika Komputer dan Visualisasi\vs\Debug\vc110.pdb'; linking object as if no debug info
+SOIL.lib(image_helper.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'SOIL.lib(image_helper.obj)' or at 'D:\PROJECT C\grafkomnew\project-grafkom\Grafika Komputer dan Visualisasi\vs\Debug\vc110.pdb'; linking object as if no debug info
+SOIL.lib(SOIL.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'SOIL.lib(SOIL.obj)' or at 'D:\PROJECT C\grafkomnew\project-grafkom\Grafika Komputer dan Visualisasi\vs\Debug\vc110.pdb'; linking object as if no debug info
+SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'SOIL.lib(stb_image_aug.obj)' or at 'D:\PROJECT C\grafkomnew\project-grafkom\Grafika Komputer dan Visualisasi\vs\Debug\vc110.pdb'; linking object as if no debug info
+  Lesson04.vcxproj -> D:\PROJECT C\grafkomnew\project-grafkom\Grafika Komputer dan Visualisasi\vs\Debug\Project.exe
