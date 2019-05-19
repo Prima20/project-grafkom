@@ -16,11 +16,17 @@ void Demo::Init() {
 	// build and compile our shader program
 	// ------------------------------------
 	shaderProgram = BuildShader("vertexShader.vert", "fragmentShader.frag", nullptr);
+	tshaderProgram = BuildShader("texturedObject.vert", "texturedObject.frag", nullptr);
 
 	//BuildColoredCube();
 
 	BuildColoredPlane();
-	BuildGedung(10,10, 7.0f);
+
+	//Gedung
+	BuildGedung(0,"building.png",10,10, 7.0f,0.0f);
+	BuildGedung(1, "building2.png", 10, -10.0f, 7.0f, -17.0f);
+	BuildGedung(2, "building3.png", 10, 5.0f, 7.0f, -20.0f);
+
 	BuildSlider(2, -7, 5);
 
 	BuildVidioTrone(5,5,0,-5);
@@ -212,6 +218,15 @@ void Demo::Render() {
 	GLint viewLoc = glGetUniformLocation(this->shaderProgram, "view");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
+	// set lighting attributes
+	GLint lightPosLoc = glGetUniformLocation(this->tshaderProgram, "lightPos");
+	glUniform3f(lightPosLoc, 0, 1, 0);
+	GLint viewPosLoc = glGetUniformLocation(this->tshaderProgram, "viewPos");
+	glUniform3f(viewPosLoc, 0, 2, 3);
+	GLint lightColorLoc = glGetUniformLocation(this->tshaderProgram, "lightColor");
+	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+
+	//Draw Object in scene
 	//DrawColoredCube();
 
 	DrawColoredPlane();
@@ -219,7 +234,12 @@ void Demo::Render() {
 	DrawBench();
 
 	DrawSkybox();
-	DrawGedung();
+
+	DrawGedung(0);
+	DrawGedung(1);
+	DrawGedung(2);
+
+
 	DrawVidioTrone();
 	//DrawSlider();
 
@@ -575,8 +595,8 @@ void Demo::BuildBench(float xpos, float zpos) {
 	// load image into texture memory
 	// ------------------------------
 	// Load and create a texture 
-	glGenTextures(1, &textureBuilding);
-	glBindTexture(GL_TEXTURE_2D, textureBuilding);
+	glGenTextures(1, &textureBench);
+	glBindTexture(GL_TEXTURE_2D, textureBench);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
@@ -622,16 +642,16 @@ void Demo::BuildBench(float xpos, float zpos) {
 		12, 14, 13, 12, 15, 14,  // left
 	};
 
-	glGenVertexArrays(1, &VAOBuilding);
-	glGenBuffers(1, &VBOBuilding);
-	glGenBuffers(1, &EBOBuilding);
+	glGenVertexArrays(1, &VAOBench);
+	glGenBuffers(1, &VBOBench);
+	glGenBuffers(1, &EBOBench);
 	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-	glBindVertexArray(VAOBuilding);
+	glBindVertexArray(VAOBench);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBOBuilding);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOBench);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOBuilding);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOBench);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// define position pointer layout 0
@@ -653,18 +673,18 @@ void Demo::BuildBench(float xpos, float zpos) {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void Demo::BuildGedung(int size, float xpos, float ypos) {
+void Demo::BuildGedung(int index, char* textureName, int size, float xpos, float ypos, float zpos) {
 	// load image into texture memory
 	// ------------------------------
 	// Load and create a texture 
-	glGenTextures(1, &textureGedung);
-	glBindTexture(GL_TEXTURE_2D, textureGedung);
+	glGenTextures(1, &textureGedung[index]);
+	glBindTexture(GL_TEXTURE_2D, textureGedung[index]);
 	//glEnable(GL_BLEND);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("building.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image(textureName, &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -677,8 +697,8 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 	float leftX = (-0.5f *w / 2)+xpos;
 	float topY = 0.5f *t +ypos;
 	float botY = -0.5f *t +ypos ;
-	float frontZ = 0.5f *w / 2;
-	float backZ = -0.5f *w / 2;
+	float frontZ = 0.5f *w / 2 +zpos;
+	float backZ = -0.5f *w / 2 +zpos;
 	float tinggiAtap = 1;
 	float atapWidth = w;
 
@@ -740,16 +760,16 @@ void Demo::BuildGedung(int size, float xpos, float ypos) {
 
 	};
 
-	glGenVertexArrays(1, &VAOGedung);
-	glGenBuffers(1, &VBOGedung);
-	glGenBuffers(1, &EBOGedung);
+	glGenVertexArrays(1, &VAOGedung[index]);
+	glGenBuffers(1, &VBOGedung[index]);
+	glGenBuffers(1, &EBOGedung[index]);
 	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-	glBindVertexArray(VAOGedung);
+	glBindVertexArray(VAOGedung[index]);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBOGedung);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOGedung[index]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOGedung);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOGedung[index]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// define position pointer layout 0
@@ -1070,15 +1090,15 @@ void Demo::DrawVidioTrone()
 	glBindVertexArray(0);
 }
 
-void Demo::DrawGedung()
+void Demo::DrawGedung(int index)
 {
 	glUseProgram(shaderProgram);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureGedung);
+	glBindTexture(GL_TEXTURE_2D, textureGedung[index]);
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
 
-	glBindVertexArray(VAOGedung); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	glBindVertexArray(VAOGedung[index]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	glDrawElements(GL_TRIANGLES, 48, GL_UNSIGNED_INT, 0);
 
@@ -1106,10 +1126,10 @@ void Demo::DrawBench() {
 	glUseProgram(shaderProgram);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureBuilding);
+	glBindTexture(GL_TEXTURE_2D, textureBench);
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
 
-	glBindVertexArray(VAOBuilding); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	glBindVertexArray(VAOBench); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	glDrawElements(GL_TRIANGLES, 24, GL_UNSIGNED_INT, 0);
 

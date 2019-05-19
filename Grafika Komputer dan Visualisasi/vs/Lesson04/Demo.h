@@ -6,6 +6,7 @@
 #include <glm/gtx/vector_angle.hpp>
 #include <SOIL/SOIL.h>
 
+
 #define OBJECTNUMBER 25
 
 class Demo :
@@ -15,12 +16,13 @@ public:
 	Demo();
 	~Demo();
 private:
-	GLuint VBOGedung, VAOGedung, EBOGedung, textureGedung;
+	GLuint VBOGedung[OBJECTNUMBER], VAOGedung[OBJECTNUMBER], EBOGedung[OBJECTNUMBER], textureGedung[OBJECTNUMBER];
+	GLuint tshaderProgram;
 	GLuint VBOkakiTrone, VAOkakiTrone, EBOkakiTrone, textureTrone;
 	GLuint VBOKepalaTrone, VAOKepalaTrone, EBOKepalaTrone, textureKepalaTrone;
 	GLuint shaderProgram, VBO, VAO, EBO, texture, VBO2, VAO2, EBO2, texture2;
 	GLuint VBOSkybox, VAOSkybox, EBOSkybox, textureSkybox;
-	GLuint VBOBuilding, VAOBuilding, EBOBuilding, textureBuilding;
+	GLuint VBOBench, VAOBench, EBOBench, textureBench;
 	GLuint VBOSlider, VAOSlider, EBOSlider, textureSlider;
 	GLuint shaderKincir, VBOKincir[OBJECTNUMBER], VAOKincir[OBJECTNUMBER], EBOKincir[OBJECTNUMBER], textureKincir[OBJECTNUMBER];
 	GLuint shaderkKincir, VBOkKincir[OBJECTNUMBER], VAOkKincir[OBJECTNUMBER], EBOkKincir[OBJECTNUMBER], texturekKincir[OBJECTNUMBER];
@@ -30,8 +32,8 @@ private:
 	float angle = 0, gerak = 1.5, gerakRollerCoster = 0;
 	virtual void Init();
 	virtual void DeInit();
-	void BuildGedung(int size,float xpos,float ypos);
-	void DrawGedung();
+	void BuildGedung(int index, char* textureName,  int size,float xpos,float ypos,float zpos);
+	void DrawGedung(int index);
 	void BuildSlider(int size, float xpos, float ypos);
 	void DrawSlider();
 	void BuildKolam(int size, float xpos, float ypos);
