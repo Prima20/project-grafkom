@@ -125,7 +125,7 @@ void RenderEngine::PrintFrameRate() {
 	//print only once every 60 frames
 	frameCounter++;
 	if (frameCounter == 60) {
-		std::cout << "FPS: " << fps << std::endl;
+		//std::cout << "FPS: " << fps << std::endl;
 		frameCounter = 0;
 	}
 }

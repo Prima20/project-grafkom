@@ -184,15 +184,12 @@ void Demo::ProcessInput(GLFWwindow *window) {
 		viewCamY = posCamY - 8;
 	}
 	RotateCamera(-angleY);
-
-
-	
-
 }
 
 void Demo::Update(double deltaTime) {
 	angle -= (float)((deltaTime * 1.5f) / 1000);
-	std::cout << "angle: " << angle << std::endl;
+	gerakRollerCoster -= (float)((deltaTime * 1.5f) / 100);
+	//std::cout << "angle: " << angle << std::endl;
 }
 
 void Demo::Render() {
@@ -257,8 +254,8 @@ void Demo::Render() {
 	}
 
 #pragma region kincir
-	//draw kincir1
 	{
+		//draw kincir1 (kanan depan)
 		DrawKincir(0, -5, 6, 0);
 		DrawKincir(1, -5, 6, 0);
 		DrawKincir(2, -5, 6, 0);
@@ -266,7 +263,7 @@ void Demo::Render() {
 		DrawKakiKincir(0, -5, 0, 0);
 		DrawKakiKincir(1, -5, 0, 0);
 
-		//draw kincir2
+		//draw kincir2 (kiri depan)
 		DrawKincir(3, -15, 6, 0);
 		DrawKincir(4, -15, 6, 0);
 		DrawKincir(5, -15, 6, 0);
@@ -274,7 +271,7 @@ void Demo::Render() {
 		DrawKakiKincir(2, -15, 0, 0);
 		DrawKakiKincir(3, -15, 0, 0);
 
-		//draw kincir3
+		//draw kincir3 (kanan belakang)
 		DrawKincir(6, -5, 6, -9);
 		DrawKincir(7, -5, 6, -9);
 		DrawKincir(8, -5, 6, -9);
@@ -282,7 +279,7 @@ void Demo::Render() {
 		DrawKakiKincir(4, -5, 0, -9);
 		DrawKakiKincir(5, -5, 0, -9);
 
-		//draw kincir4
+		//draw kincir4 (kiri belakang)
 		DrawKincir(9, -15, 6, -9);
 		DrawKincir(10, -15, 6, -9);
 		DrawKincir(11, -15, 6, -9);
@@ -1240,29 +1237,38 @@ void Demo::DrawRoadRoller(int index) {
 	glBindVertexArray(VAORoadRoller[index]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 	
 	glm::mat4 model;
-	float jalan = abs(angle);
-	if (jalan < 12) {
-		model = glm::translate(model, glm::vec3(0, 0, jalan));
-		n = 1;
+	float jalan = abs(gerakRollerCoster);
+	float posisi = index + 15;
+	//gerak roller
+	{
+		if (jalan < 15 + posisi) {
+			model = glm::translate(model, glm::vec3(0, 0, jalan));
+		}
+		else if (jalan >= 15 + posisi && jalan < 35 + posisi) {
+			gerak = 1.55;
+			model = glm::translate(model, glm::vec3((jalan-22), 0, 24));
+			model = glm::rotate(model, gerak, glm::vec3(0, 1, 0));
+		}
+		else if (jalan >= 35 + posisi && jalan < 75 + posisi) {
+			gerak = 3.15;
+			model = glm::translate(model, glm::vec3(20, 0, gerakRollerCoster + 65));
+			model = glm::rotate(model, gerak, glm::vec3(0, 1, 0));
+		}
+		else if (jalan >= 75 + posisi && jalan < 92 + posisi) {
+			gerak = 4.7;
+			model = glm::translate(model, glm::vec3(gerakRollerCoster + 100, 0, -17));
+			model = glm::rotate(model, gerak, glm::vec3(0, 1, 0));
+		}
+		else if (jalan >= 92 +posisi && jalan < 115) {
+			gerak = 6.3;
+			model = glm::translate(model, glm::vec3(0, 0, jalan-115));
+			model = glm::rotate(model, gerak, glm::vec3(0, 1, 0));
+		}
+		else {
+			gerakRollerCoster = 0;
+			model = glm::rotate(model, gerak, glm::vec3(0, 1, 0));
+		}
 	}
-	else if (jalan >= 12 && jalan < 24) {
-		model = glm::translate(model, glm::vec3(jalan, 0, 9));
-		model = glm::rotate(model, gerak, glm::vec3(0, 1, 0));
-	}
-	else if (jalan >= 24 && jalan < 40) {
-		gerak = 3.1;
-		model = glm::translate(model, glm::vec3(20, 0, angle+20));
-		model = glm::rotate(model, gerak, glm::vec3(0, 1, 0));
-	}
-	else if (jalan >= 40 && jalan < 50) {
-		gerak = 4.5;
-		model = glm::translate(model, glm::vec3(angle+45, 0, -15));
-		model = glm::rotate(model, gerak, glm::vec3(0, 1, 0));
-	}
-	else {
-		angle = 0;
-	}
-	//model = glm::translate(model,glm::vec3(0, 0, -angle));
 	model = glm::scale(model, glm::vec3(1, 1, 1));
 
 	GLint modelLocKomidi = glGetUniformLocation(this->shaderProgram, "model");
@@ -1589,7 +1595,7 @@ void Demo::InitCamera()
 	upCamZ = 0.0f;
 	//CAMERA_SPEED = 0.0001f;
 	//Change cam speed for debug
-	CAMERA_SPEED = 0.001f;
+	CAMERA_SPEED = 0.005f;
 	fovy = 50.0f;
 	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }

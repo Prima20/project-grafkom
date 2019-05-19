@@ -27,7 +27,7 @@ private:
 	GLuint VBORoadRoller[OBJECTNUMBER], VAORoadRoller[OBJECTNUMBER], EBORoadRoller[OBJECTNUMBER], textureRoadRoller[OBJECTNUMBER];
 	GLuint shaderKomidi, VBOKomidi[OBJECTNUMBER], VAOKomidi[OBJECTNUMBER], EBOKomidi[OBJECTNUMBER], textureKomidi[OBJECTNUMBER];
 	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy;
-	float angle = 0, gerak = 1.5, n = 0;
+	float angle = 0, gerak = 1.5, gerakRollerCoster = 0;
 	virtual void Init();
 	virtual void DeInit();
 	void BuildGedung(int size,float xpos,float ypos);
