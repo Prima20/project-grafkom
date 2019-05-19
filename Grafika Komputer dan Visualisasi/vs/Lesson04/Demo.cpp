@@ -23,9 +23,9 @@ void Demo::Init() {
 	BuildColoredPlane();
 
 	//Gedung
-	BuildGedung(0,10,10, 7.0f,0.0f);
-	BuildGedung(1, 10, -10.0f, 7.0f, -17.0f);
-	BuildGedung(2, 10, 5.0f, 7.0f, -20.0f);
+	BuildGedung(0,"building.png",10,10, 7.0f,0.0f);
+	BuildGedung(1, "building2.png", 10, -10.0f, 7.0f, -17.0f);
+	BuildGedung(2, "building3.png", 10, 5.0f, 7.0f, -20.0f);
 
 	BuildSlider(2, -7, 5);
 
@@ -676,7 +676,7 @@ void Demo::BuildBench(float xpos, float zpos) {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void Demo::BuildGedung(int index, int size, float xpos, float ypos, float zpos) {
+void Demo::BuildGedung(int index, char* textureName, int size, float xpos, float ypos, float zpos) {
 	// load image into texture memory
 	// ------------------------------
 	// Load and create a texture 
@@ -687,7 +687,7 @@ void Demo::BuildGedung(int index, int size, float xpos, float ypos, float zpos) 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("building.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image(textureName, &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);

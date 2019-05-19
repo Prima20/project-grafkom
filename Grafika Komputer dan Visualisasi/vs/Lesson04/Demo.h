@@ -6,6 +6,7 @@
 #include <glm/gtx/vector_angle.hpp>
 #include <SOIL/SOIL.h>
 
+
 #define OBJECTNUMBER 25
 
 class Demo :
@@ -31,7 +32,7 @@ private:
 	float angle = 0, gerak = 1.5, n = 0;
 	virtual void Init();
 	virtual void DeInit();
-	void BuildGedung(int index, int size,float xpos,float ypos,float zpos);
+	void BuildGedung(int index, char* textureName,  int size,float xpos,float ypos,float zpos);
 	void DrawGedung(int index);
 	void BuildSlider(int size, float xpos, float ypos);
 	void DrawSlider();
