@@ -37,7 +37,7 @@ private:
 	void BuildSlider(int size, float xpos, float ypos);
 	void DrawSlider();
 	void BuildKolam(int size, float xpos, float ypos);
-	void BuildKomidiKotak(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin, float atap);
+	void BuildKomidiKotak(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin, float atap, float textureXpos1, float textureYpos1, float textureXpos2, float textureYpos2, float textureXpos3, float textureYpos3, float textureXpos4, float textureYpos4 );
 	void DrawKolam();
 	void DrawKomidiKotak(int index, float xpos, float ypos, float zpos);
 	virtual void Update(double deltaTime);

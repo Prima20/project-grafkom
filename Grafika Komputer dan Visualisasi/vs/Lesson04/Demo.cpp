@@ -38,33 +38,33 @@ void Demo::Init() {
 	BuildRoadRoller(2, 0, -12.0f);
 
 
-	//build komidi kotak alas
-	BuildKomidiKotak(0, 2, -2, 0, -0.5, 2, -2, 0);
-	BuildKomidiKotak(1, 2.5, -2.5, 0, -0.5, 2.5, -2.5, 0);
+	//build komidi kotak alas                     //texture coordinate
+	BuildKomidiKotak(0, 2, -2, 0, -0.5, 2, -2, 0, 0, 0.6, 1, 0.6, 1, 0.75, 0, 0.75);
+	BuildKomidiKotak(1, 2.5, -2.5, 0, -0.5, 2.5, -2.5, 0, 0, 0.25, 1, 0.25, 1, 0.5, 0, 0.5);
 
 	//build komidi kotak atap
-	BuildKomidiKotak(2, 2, -2, 0, -0.5, 2, -2, 0);
-	BuildKomidiKotak(3, 2.5, -2.5, 0, -0.5, 2.5, -2.5, 0);
+	BuildKomidiKotak(2, 2, -2, 0, -0.5, 2, -2, 0, 0, 0.6, 1, 0.6, 1, 0.75, 0, 0.75);
+	BuildKomidiKotak(3, 2.5, -2.5, 0, -0.5, 2.5, -2.5, 0, 0, 0.25, 1, 0.25, 1, 0.5, 0, 0.5);
 
 	//build komidi tiang
 	{
-		BuildKomidiKotak(4, 0.1, -0.1, 3, -3, 0.1, -0.1, 0); //tengah
-		BuildKomidiKotak(5, 2.4, 2.3, 3, -3, 0.1, -0.1, 0); //kanan
-		BuildKomidiKotak(6, 0.1, -0.1, 3, -3, 2.4, 2.3, 0); //depan
-		BuildKomidiKotak(7, -2.4, -2.3, 3, -3, 0.1, -0.1, 0); //kiri
-		BuildKomidiKotak(8, 0.1, -0.1, 3, -3, -2.4, -2.3, 0); //belakang
-		BuildKomidiKotak(9, 2.4, 2.3, 3, -3, 2.4, 2.3, 0); //kanandepan
-		BuildKomidiKotak(10, 2.4, 2.3, 3, -3, -2.4, -2.3, 0); //kananbelakang
-		BuildKomidiKotak(11, -2.4, -2.3, 3, -3, 2.4, 2.3, 0); //kiridepan
-		BuildKomidiKotak(12, -2.4, -2.3, 3, -3, -2.4, -2.3, 0); //kiribelakang
+		BuildKomidiKotak(4, 0.1, -0.1, 3, -3, 0.1, -0.1, 0, 0, 0, 1, 0, 1, 0.25, 0, 0.25); //tengah
+		BuildKomidiKotak(5, 2.4, 2.3, 3, -3, 0.1, -0.1, 0, 0, 0, 1, 0, 1, 0.25, 0, 0.25); //kanan
+		BuildKomidiKotak(6, 0.1, -0.1, 3, -3, 2.4, 2.3, 0, 0, 0, 1, 0, 1, 0.25, 0, 0.25); //depan
+		BuildKomidiKotak(7, -2.4, -2.3, 3, -3, 0.1, -0.1, 0, 0, 0, 1, 0, 1, 0.25, 0, 0.25); //kiri
+		BuildKomidiKotak(8, 0.1, -0.1, 3, -3, -2.4, -2.3, 0, 0, 0, 1, 0, 1, 0.25, 0, 0.25); //belakang
+		BuildKomidiKotak(9, 2.4, 2.3, 3, -3, 2.4, 2.3, 0, 0, 0, 1, 0, 1, 0.25, 0, 0.25); //kanandepan
+		BuildKomidiKotak(10, 2.4, 2.3, 3, -3, -2.4, -2.3, 0, 0, 0, 1, 0, 1, 0.25, 0, 0.25); //kananbelakang
+		BuildKomidiKotak(11, -2.4, -2.3, 3, -3, 2.4, 2.3, 0, 0, 0, 1, 0, 1, 0.25, 0, 0.25); //kiridepan
+		BuildKomidiKotak(12, -2.4, -2.3, 3, -3, -2.4, -2.3, 0, 0, 0, 1, 0, 1, 0.25, 0, 0.25); //kiribelakang
 	}
 
 	//build kuda
 	{
-		BuildKomidiKotak(13, 2.5, 2.3, 0.1, -0.1, 0.7, -0.7, 0); //kanan
-		BuildKomidiKotak(14, 0.7, -0.7, 0.1, -0.1, 2.5, 2.3, 0); //depan
-		BuildKomidiKotak(15, -2.5, -2.3, 0.1, -0.1, 0.7, -0.7, 0); //kiri
-		BuildKomidiKotak(16, 0.7, -0.7, 0.1, -0.1, -2.5, -2.3, 0); //belakang
+		BuildKomidiKotak(13, 2.5, 2.3, 0.1, -0.1, 0.7, -0.7, 0, 0, 0.6, 1, 0.6, 1, 0.75, 0, 0.75); //kanan
+		BuildKomidiKotak(14, 0.7, -0.7, 0.1, -0.1, 2.5, 2.3, 0, 0, 0.6, 1, 0.6, 1, 0.75, 0, 0.75); //depan
+		BuildKomidiKotak(15, -2.5, -2.3, 0.1, -0.1, 0.7, -0.7, 0, 0, 0.6, 1, 0.6, 1, 0.75, 0, 0.75); //kiri
+		BuildKomidiKotak(16, 0.7, -0.7, 0.1, -0.1, -2.5, -2.3, 0, 0, 0.6, 1, 0.6, 1, 0.75, 0, 0.75); //belakang
 	}
 
 #pragma region kincir
@@ -1300,53 +1300,53 @@ void Demo::DrawRoadRoller(int index) {
 	glBindVertexArray(0);
 }
 
-void Demo::BuildKomidiKotak(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin, float atap) {
+void Demo::BuildKomidiKotak(int index, float xplus, float xmin, float yplus, float ymin, float zplus, float zmin, float atap, float textureXpos1, float textureYpos1, float textureXpos2, float textureYpos2, float textureXpos3, float textureYpos3, float textureXpos4, float textureYpos4) {
 	glGenTextures(1, &textureKomidi[index]);
 	glBindTexture(GL_TEXTURE_2D, textureKomidi[index]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("crate.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("komidicolor.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	float vertices[] = {
 		// front
-		xmin, ymin, zplus, 0, 0,  // 0
-		xplus, ymin, zplus, 1, 0,   // 1
-		xplus,  yplus, zplus, 1, 1,   // 2
-		xmin,  yplus, zplus, 0, 1,  // 3
+		xmin, ymin, zplus, textureXpos1, textureYpos1,  // 0
+		xplus, ymin, zplus, textureXpos2, textureYpos2,   // 1
+		xplus,  yplus, zplus, textureXpos3, textureYpos3,   // 2
+		xmin,  yplus, zplus, textureXpos4, textureYpos4,  // 3
 
 									// right
-									xplus,  yplus,  zplus, 0, 0,  // 4
-									xplus,  yplus, zmin, 1, 0,  // 5
-									xplus, ymin, zmin, 1, 1,  // 6
-									xplus, ymin,  zplus, 0, 1,  // 7
+									xplus,  yplus,  zplus, textureXpos1, textureYpos1,  // 4
+									xplus,  yplus, zmin, textureXpos2, textureYpos2,  // 5
+									xplus, ymin, zmin, textureXpos3, textureYpos3,  // 6
+									xplus, ymin,  zplus, textureXpos4, textureYpos4,  // 7
 
 																// back
-																xmin, ymin, zmin, 0, 0, // 8 
-																xplus,  ymin, zmin, 1, 0, // 9
-																xplus,   yplus, zmin, 1, 1, // 10
-																xmin,  yplus, zmin, 0, 1, // 11
+																xmin, ymin, zmin, textureXpos1, textureYpos1, // 8 
+																xplus,  ymin, zmin, textureXpos2, textureYpos2, // 9
+																xplus,   yplus, zmin, textureXpos3, textureYpos3, // 10
+																xmin,  yplus, zmin, textureXpos4, textureYpos4, // 11
 
 																						  // left
-																						  xmin, ymin, zmin, 0, 0, // 12
-																						  xmin, ymin, zplus, 1, 0, // 13
-																						  xmin,  yplus,  zplus, 1, 1, // 14
-																						  xmin,  yplus, zmin, 0, 1, // 15
+																						  xmin, ymin, zmin, textureXpos1, textureYpos1, // 12
+																						  xmin, ymin, zplus, textureXpos2, textureYpos2, // 13
+																						  xmin,  yplus,  zplus,textureXpos3, textureYpos3, // 14
+																						  xmin,  yplus, zmin, textureXpos4, textureYpos4, // 15
 
 																													// upper
-																													xplus, yplus,  zplus, 0, 0,   // 16
-																													xmin, yplus,  zplus, 1, 0,  // 17
-																													xmin, yplus, zmin, 1, 1,  // 18
-																													xplus, yplus, zmin, 0, 1,   // 19
+																													xplus, yplus,  zplus, textureXpos1, textureYpos1,   // 16
+																													xmin, yplus,  zplus, textureXpos2, textureYpos2,  // 17
+																													xmin, yplus, zmin,textureXpos3, textureYpos3,  // 18
+																													xplus, yplus, zmin,textureXpos4, textureYpos4,   // 19
 
 																																				// bottom
-																																				xmin, ymin, zmin, 0, 0, // 20
-																																				xplus, ymin, zmin, 1, 0,  // 21
-																																				xplus, ymin,  zplus, 1, 1,  // 22
-																																				xmin, ymin,  zplus, 0, 1, // 23
+																																				xmin, ymin, zmin, textureXpos1, textureYpos1, // 20
+																																				xplus, ymin, zmin, textureXpos2, textureYpos2,  // 21
+																																				xplus, ymin,  zplus, textureXpos3, textureYpos3,  // 22
+																																				xmin, ymin,  zplus,textureXpos4, textureYpos4, // 23
 
 	(xmin + xplus) / 2,yplus + atap,(zplus + zmin) / 2,0.5,1 //24
 	};
