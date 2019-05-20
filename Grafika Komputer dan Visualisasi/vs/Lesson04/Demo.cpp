@@ -1407,6 +1407,7 @@ void Demo::BuildKincir(int index, float xplus, float xmin, float yplus, float ym
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
+	//std::cout << "width and height: " << width<< std::endl;
 	unsigned char* image = SOIL_load_image("crate.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
@@ -1419,35 +1420,35 @@ void Demo::BuildKincir(int index, float xplus, float xmin, float yplus, float ym
 		xplus,  yplus, zplus, 1, 1,   // 2
 		xmin,  yplus, zplus, 0, 1,  // 3
 
-								// right
-								xplus,  yplus,  zplus, 0, 0,  // 4
-								xplus,  yplus, zmin, 1, 0,  // 5
-								xplus, ymin, zmin, 1, 1,  // 6
-								xplus, ymin,  zplus, 0, 1,  // 7
+		// right
+		xplus,  yplus,  zplus, 0, 0,  // 4
+		xplus,  yplus, zmin, 1, 0,  // 5
+		xplus, ymin, zmin, 1, 1,  // 6
+		xplus, ymin,  zplus, 0, 1,  // 7
 
-														// back
-														xmin, ymin, zmin, 0, 0, // 8 
-														xplus,  ymin, zmin, 1, 0, // 9
-														xplus,   yplus, zmin, 1, 1, // 10
-														xmin,  yplus, zmin, 0, 1, // 11
+		// back
+		xmin, ymin, zmin, 0, 0, // 8 
+		xplus,  ymin, zmin, 1, 0, // 9
+		xplus,   yplus, zmin, 1, 1, // 10
+		xmin,  yplus, zmin, 0, 1, // 11
 
-																				// left
-																				xmin, ymin, zmin, 0, 0, // 12
-																				xmin, ymin, zplus, 1, 0, // 13
-																				xmin,  yplus,  zplus, 1, 1, // 14
-																				xmin,  yplus, zmin, 0, 1, // 15
+		// left
+		xmin, ymin, zmin, 0, 0, // 12
+		xmin, ymin, zplus, 1, 0, // 13
+		xmin,  yplus,  zplus, 1, 1, // 14
+		xmin,  yplus, zmin, 0, 1, // 15
 
-																										// upper
-																										xplus, yplus,  zplus, 0, 0,   // 16
-																										xmin, yplus,  zplus, 1, 0,  // 17
-																										xmin, yplus, zmin, 1, 1,  // 18
-																										xplus, yplus, zmin, 0, 1,   // 19
+		// upper
+		xplus, yplus,  zplus, 0, 0,   // 16
+		xmin, yplus,  zplus, 1, 0,  // 17
+		xmin, yplus, zmin, 1, 1,  // 18
+		xplus, yplus, zmin, 0, 1,   // 19
 
-																																// bottom
-																																xmin, ymin, zmin, 0, 0, // 20
-																																xplus, ymin, zmin, 1, 0,  // 21
-																																xplus, ymin,  zplus, 1, 1,  // 22
-																																xmin, ymin,  zplus, 0, 1, // 23
+		// bottom
+		xmin, ymin, zmin, 0, 0, // 20
+		xplus, ymin, zmin, 1, 0,  // 21
+		xplus, ymin,  zplus, 1, 1,  // 22
+		xmin, ymin,  zplus, 0, 1, // 23
 	};
 
 	unsigned int indices[] = {
@@ -1458,7 +1459,6 @@ void Demo::BuildKincir(int index, float xplus, float xmin, float yplus, float ym
 		16, 18, 17, 16, 19, 18,  // upper
 		20, 22, 21, 20, 23, 22,   // bottom
 	};
-
 
 	glGenVertexArrays(1, &VAOKincir[index]);
 	glGenBuffers(1, &VBOKincir[index]);
@@ -1474,7 +1474,7 @@ void Demo::BuildKincir(int index, float xplus, float xmin, float yplus, float ym
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);//*/
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void Demo::DrawKincir(int index, float xpos, float ypos, float zpos) {
@@ -1484,16 +1484,16 @@ void Demo::DrawKincir(int index, float xpos, float ypos, float zpos) {
 	glBindTexture(GL_TEXTURE_2D, textureKincir[index]);
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
 
-	glBindVertexArray(VAOKincir[index]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	glBindVertexArray(VAOKincir[index]);
 
-	glm::mat4 modelkomidi;
-	modelkomidi = glm::translate(modelkomidi, glm::vec3(xpos, ypos, zpos));
-	modelkomidi = glm::rotate(modelkomidi, angle, glm::vec3(0, 0, 1));
+	glm::mat4 model;
+	model = glm::translate(model, glm::vec3(xpos, ypos, zpos));
+	model = glm::rotate(model, angle, glm::vec3(0, 0, 1));
 
-	modelkomidi = glm::scale(modelkomidi, glm::vec3(1, 1, 1));
+	model = glm::scale(model, glm::vec3(1, 1, 1));
 
 	GLint modelLocKomidi = glGetUniformLocation(this->shaderProgram, "model");
-	glUniformMatrix4fv(modelLocKomidi, 1, GL_FALSE, glm::value_ptr(modelkomidi));
+	glUniformMatrix4fv(modelLocKomidi, 1, GL_FALSE, glm::value_ptr(model));
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
