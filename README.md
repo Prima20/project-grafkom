@@ -1,5 +1,5 @@
 # project-grafkom
-Final project of computer graphic course
+Final project of computer graphic course, We Create Fun Park
 
 Created by team Ashiaap:
 1. Primananda K S (165150201111031)
